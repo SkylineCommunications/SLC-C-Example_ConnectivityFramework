@@ -432,7 +432,7 @@ public class WriteParameters
 	public System.Object Connectionfilter {get { return Protocol.GetParameter(1053); }set { Protocol.SetParameter(1053, value); }}
 	/// <summary>PID: 1100  | Type: write | DISCREETS: Add Input... = add inp, Add Output... = add out, Add Virtual... = add virt, Delete Selected = delete Int, Clear Table = clear Int</summary>
 	public System.Object Driverinterfaces_contextmenu {get { return Protocol.GetParameter(1100); }set { Protocol.SetParameter(1100, value); }}
-	/// <summary>PID: 1114  | Type: write | DISCREETS: DOWN = 0, UP = 1</summary>
+	/// <summary>PID: 1114  | Type: write | DISCREETS: Down = 0, Up = 1</summary>
 	public System.Object Driverinterfacesinterfacestate {get { return Protocol.GetParameter(1114); }set { Protocol.SetParameter(1114, value); }}
 	/// <summary>PID: 1115  | Type: write</summary>
 	public System.Object Driverinterfacesinterfacepropertya {get { return Protocol.GetParameter(1115); }set { Protocol.SetParameter(1115, value); }}
@@ -644,10 +644,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Driverinterfacestype_113 {get { return GetParameter(113); }set { SetParameter(113, value); }}
 	/// <summary>PID: 113  | Type: read | DISCREETS: Virtual = 102, Input = 100, Output = 101</summary>
 	public System.Object Driverinterfacestype {get { return GetParameter(113); }set { SetParameter(113, value); }}
-	/// <summary>PID: 114  | Type: read | DISCREETS: DOWN = 0, UP = 1</summary>
+	/// <summary>PID: 114  | Type: read | DISCREETS: Down = 0, Up = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Driverinterfacesinterfacestate_114 {get { return GetParameter(114); }set { SetParameter(114, value); }}
-	/// <summary>PID: 114  | Type: read | DISCREETS: DOWN = 0, UP = 1</summary>
+	/// <summary>PID: 114  | Type: read | DISCREETS: Down = 0, Up = 1</summary>
 	public System.Object Driverinterfacesinterfacestate {get { return GetParameter(114); }set { SetParameter(114, value); }}
 	/// <summary>PID: 115  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -743,7 +743,7 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Driverinterfaces_contextmenu_1100 {get { return GetParameter(1100); }set { SetParameter(1100, value); }}
 	/// <summary>PID: 1100  | Type: write | DISCREETS: Add Input... = add inp, Add Output... = add out, Add Virtual... = add virt, Delete Selected = delete Int, Clear Table = clear Int</summary>
 	public System.Object Driverinterfaces_contextmenu {get { return Write.Driverinterfaces_contextmenu; }set { Write.Driverinterfaces_contextmenu = value; }}
-	/// <summary>PID: 1114  | Type: write | DISCREETS: DOWN = 0, UP = 1</summary>
+	/// <summary>PID: 1114  | Type: write | DISCREETS: Down = 0, Up = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Driverinterfacesinterfacestate_1114 {get { return GetParameter(1114); }set { SetParameter(1114, value); }}
 	/// <summary>PID: 1115  | Type: write</summary>
