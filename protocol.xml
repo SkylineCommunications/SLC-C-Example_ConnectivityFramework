@@ -1,6 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?><!--
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
 ****************************************************************************
-*  Copyright (c) 2018,  Skyline Communications NV  All Rights Reserved.    *
+*  Copyright (c) 2022,  Skyline Communications NV  All Rights Reserved.    *
 ****************************************************************************
 
 By using this driver, you expressly agree with the usage terms and
@@ -36,38 +37,23 @@ Any inquiries can be addressed to:
 	Belgium
 	Tel.	: +32 51 31 35 69
 	Fax.	: +32 51 31 01 29
-	E-mail	: info@skyline.be 
+	E-mail	: info@skyline.be
 	Web		: www.skyline.be
 	Contact	: Ben Vandenberghe
-
-****************************************************************************
-Revision History:
-
-DATE		VERSION		AUTHOR			COMMENTS
-
-28/09/2015	1.0.0.1	JST, Skyline	Initial Version
-23/02/2016	1.0.0.2	JST, Skyline	DCFHelper version 1.0.0.4
-23/09/2016  1.0.0.3 JST, Skyline	DCFHelper version 1.0.0.5
-04/10/2016	1.0.0.4	JST, Skyline	DCFHelper version 1.0.0.6
-04/10/2016	1.0.0.5	JST, Skyline	DCFHelper version 1.0.0.7
-02/12/2016	1.0.0.6	JST, Skyline	DCFHelper version 1.0.0.8
-13/02/2018	1.0.0.7	JST, Skyline	DCFHelper version 1.0.0.9
-12/10/2018	1.0.0.8	JST, Skyline	Added Matrix Example and DCFHelper Version 1.0.0.10
-****************************************************************************
-
 -->
-
 <Protocol xmlns="http://www.skyline.be/protocol">
-	<Name>Skyline Example Simple DCF</Name>
+	<Name>SLC SDF DCF</Name>
 	<Description>DataMiner Connectivity Framework</Description>
-	<Version>1.0.0.8</Version>
+	<Version>1.0.0.1</Version>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Skyline</Vendor>
 	<VendorOID>1.3.6.1.4.1.8813.2.XX</VendorOID>
 	<DeviceOID>XX</DeviceOID>
 	<ElementType>Virtual</ElementType>
-	<Type relativeTimers="true" options="exportProtocol:DCF Virtual Element:500">virtual</Type>
-	<Display defaultPage="" pageOrder="Help;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;DCF Example - Get Interfaces;Matrix;Matrix2" wideColumnPages="Help" />
+	<Type relativeTimers="true" options="exportProtocol:SLC SDF DCF - DVE:500">virtual</Type>
+	<!-- SuppressValidator 1.21.5 SDF driver -->
+	<Display defaultPage="Help" pageOrder="Help;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;Matrix;Matrix2" wideColumnPages="Help" />
+	<!-- /SuppressValidator 1.21.5 -->
 	<SNMP includepages="true">auto</SNMP>
 
 	<ParameterGroups>
@@ -91,21 +77,19 @@ DATE		VERSION		AUTHOR			COMMENTS
 		<Group id="600" name="Matrix" type="inout" dynamicId="2000" dynamicIndex="*" dynamicUsePK="true" />
 		<!--Warning, all id's must stay below 10 000-->
 	</ParameterGroups>
-
+	
+	<ExportRules>
+		<ExportRule table="500" tag="Protocol/Display" attribute="pageOrder" value="General" />
+		<ExportRule table="500" tag="Protocol/Display" attribute="wideColumnPages" value="" />
+	</ExportRules>
 	<Params>
-
+		
 		<Param id="1" trending="false">
 			<Name>Help</Name>
 			<Description>Driver Help</Description>
 			<Information>
 				<Text>Driver Help</Text>
 				<Subtext>Comments on how to use this driver.</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -140,18 +124,12 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<RTDisplay>false</RTDisplay>
 			</Display>
 		</Param>
-
+		
 		<Param id="50" trending="false">
 			<Name>Mode</Name>
 			<Description>Mode</Description>
 			<Information>
 				<Subtext>Indicates if the card is working as a dual channel distribution amplifier. (using only one source, or using multiple sources) (A to A and B  or B to A and B)</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -184,16 +162,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="51" trending="false">
-			<Name>Input Selection</Name>
+			<Name>inputSelection</Name>
 			<Description>Input Selection</Description>
 			<Information>
 				<Subtext>Indicates the way the inputs are used. A to A and B to B  or  A to B and B to A</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -259,7 +231,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1051" setter="true">
-			<Name>Input Selection</Name>
+			<Name>inputSelection</Name>
 			<Description>Input Selection</Description>
 			<Type>write</Type>
 			<Interprete>
@@ -291,7 +263,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="52">
 			<Name>BUT_RemoveVirtualAConnections</Name>
 			<Description></Description>
@@ -301,6 +273,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>double</Type>
 			</Interprete>
+			<Information>
+				<Subtext>Remove virtual A connections</Subtext>
+			</Information>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -320,18 +295,13 @@ DATE		VERSION		AUTHOR			COMMENTS
 					</Discreet>
 				</Discreets>
 			</Measurement>
+			<Message>Are you sure you want to remove this virtual connection?</Message>
 		</Param>
 		<Param id="53" trending="false" save="true">
-			<Name>Connection Filter</Name>
+			<Name>connectionFilter</Name>
 			<Description>Connection Filter</Description>
 			<Information>
 				<Subtext>This is a Value saved with a connection that can be used by the DataMiner Client to perform Path Highlighting in Visio's that have the same filter.</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -355,7 +325,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1053" setter="true">
-			<Name>Connection Filter</Name>
+			<Name>connectionFilter</Name>
 			<Description>Connection Filter</Description>
 			<Type>write</Type>
 			<Interprete>
@@ -377,7 +347,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<!--ContextMenuValues-->
 		<Param id="96" trending="false">
 			<Name>context_KeyOutput</Name>
@@ -414,7 +384,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="98" trending="false">
-			<Name>context_CMTS Name</Name>
+			<Name>context_CMTSName</Name>
 			<Description>CMTS Name</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -447,7 +417,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 		</Param>
 		<!--Dynamic Table Interfaces-->
 		<Param id="100" trending="false">
-			<Name>Driver Interfaces</Name>
+			<Name>driverInterfaces</Name>
 			<Description>Driver Interfaces</Description>
 			<Type>array</Type>
 			<ArrayOptions index="0" options=";naming=/112">
@@ -478,21 +448,15 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:111|0-112|1-113|2-114|3-115|4-116|5,width:100-100-100-100-120-120,sort:STRING-STRING-STRING-STRING-STRING-STRING,lines:20,filter:false">table</Type>
+				<Type options="tab=columns:111|0-112|1-113|2-114|3-115|4-116|5,width:100-136-100-107-120-120,sort:STRING-STRING-STRING-STRING-STRING-STRING,lines:20,filter:false">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="111" trending="false">
-			<Name>DIf Key</Name>
-			<Description>DIf Key</Description>
+			<Name>driverInterfacesKey</Name>
+			<Description>Key (Driver Interfaces)</Description>
 			<Information>
 				<Text>Interface Key</Text>
 				<Subtext>Interface Key</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -508,17 +472,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="112" trending="false">
-			<Name>DIf Description [IDX]</Name>
-			<Description>DIf Description [IDX]</Description>
+			<Name>driverInterfacesDescription</Name>
+			<Description>Description [IDX] (Driver Interfaces)</Description>
 			<Information>
 				<Text>Interface Description</Text>
 				<Subtext>Interface Description</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -534,17 +492,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="113" trending="false">
-			<Name>DIf Type</Name>
-			<Description>DIf Type</Description>
+			<Name>driverInterfacesType</Name>
+			<Description>Type (Driver Interfaces)</Description>
 			<Information>
 				<Text>Interface Type</Text>
 				<Subtext>Interface Type</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -574,17 +526,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="114" trending="false">
-			<Name>DIf Interface State</Name>
-			<Description>DIf Interface State</Description>
+			<Name>driverInterfacesInterfaceState</Name>
+			<Description>Interface State (Driver Interfaces)</Description>
 			<Information>
 				<Text>Interface State</Text>
 				<Subtext>Interface State</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -592,10 +538,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>string</Type>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 No default provided -->
 			<Alarm>
 				<Monitored>true</Monitored>
-				<CH></CH>
 			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -614,8 +561,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1114" setter="true">
-			<Name>DIf Interface State</Name>
-			<Description>DIf Interface State</Description>
+			<Name>driverInterfacesInterfaceState</Name>
+			<Description>Interface State (Driver Interfaces)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -626,7 +573,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<RTDisplay>true</RTDisplay>
 			</Display>
 			<Measurement>
-				<Type>discreet</Type>
+				<Type>togglebutton</Type>
 				<Discreets>
 					<Discreet>
 						<Display>DOWN</Display>
@@ -640,16 +587,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="115" trending="false">
-			<Name>Interface Property A</Name>
-			<Description>Interface Property A</Description>
+			<Name>driverInterfacesInterfacePropertyA</Name>
+			<Description>Interface Property A (Driver Interfaces)</Description>
 			<Information>
 				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -665,16 +606,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="116" trending="false">
-			<Name>Interface Property B</Name>
-			<Description>Interface Property B</Description>
+			<Name>driverInterfacesInterfacePropertyB</Name>
+			<Description>Interface Property B (Driver Interfaces)</Description>
 			<Information>
 				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -690,8 +625,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1115" setter="true">
-			<Name>Interface Property A</Name>
-			<Description>Interface Property A</Description>
+			<Name>driverInterfacesInterfacePropertyA</Name>
+			<Description>Interface Property A (Driver Interfaces)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -706,8 +641,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1116" setter="true">
-			<Name>Interface Property B</Name>
-			<Description>Interface Property B</Description>
+			<Name>driverInterfacesInterfacePropertyB</Name>
+			<Description>Interface Property B (Driver Interfaces)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -721,7 +656,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="149">
 			<Name>PB_GetInterfaces</Name>
 			<Description></Description>
@@ -745,7 +680,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type width="110">pagebutton</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Get Interfaces ...</Display>
+						<Display>Get Interfaces...</Display>
 						<Value>Get Interfaces</Value>
 					</Discreet>
 				</Discreets>
@@ -760,6 +695,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>double</Type>
 			</Interprete>
+			<Information>
+				<Subtext>Get interfaces from DCF</Subtext>
+			</Information>
 			<Dependencies>
 				<Id>152</Id>
 				<Id>153</Id>
@@ -784,18 +722,12 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="151" trending="false">
-			<Name>Get Interfaces Result</Name>
+			<Name>getInterfacesResult</Name>
 			<Description>Get Interfaces Result</Description>
 			<Information>
 				<Subtext>This displays the result from trying to retrieve the interfaces from DCF data</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -817,19 +749,13 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type lines="10">string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="152" trending="false">
 			<Name>PropertyNameGetInterfaces</Name>
 			<Description>Property Name (Get Interfaces)</Description>
 			<Information>
 				<Subtext>Property Name</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -856,12 +782,6 @@ DATE		VERSION		AUTHOR			COMMENTS
 			<Description>Property Value (Get Interfaces)</Description>
 			<Information>
 				<Subtext>Property Value</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -929,11 +849,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="200" trending="false">
-			<Name>UniqueSourceConnections</Name>
-			<Description>UniqueSourceConnections</Description>
+			<Name>uniqueSourceConnections</Name>
+			<Description>Unique Source Connections</Description>
 			<Type>array</Type>
 			<ArrayOptions index="0">
 				<ColumnOption idx="0" pid="201" type="retrieved" options="" />
@@ -959,21 +879,15 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:201|0-202|1,width:100-100,sort:STRING-STRING,lines:20,filter:false">table</Type>
+				<Type options="tab=columns:201|0-202|1,width:177-141,sort:STRING-STRING,lines:20,filter:false">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="201" trending="false">
-			<Name>US Source Interface</Name>
-			<Description>US Source Interface [IDX]</Description>
+			<Name>uniqueSourceConnectionsSourceInterface</Name>
+			<Description>Source Interface [IDX] (Unique Source Connections)</Description>
 			<Information>
 				<Text>US Source Interface</Text>
 				<Subtext>US Source Interface</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -989,17 +903,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="202" trending="false">
-			<Name>US Destination Interface</Name>
-			<Description>US Destination Interface</Description>
+			<Name>uniqueSourceConnectionsDestinationInterface</Name>
+			<Description>Destination Interface (Unique Source Connections)</Description>
 			<Information>
-				<Text>US Destination Interface</Text>
-				<Subtext>US Destination Interface</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
+				<Subtext>Destination interface</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1015,7 +922,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1202">
-			<Name>US Destination Interface</Name>
+			<Name>uniqueSourceConnectionsDestinationInterface</Name>
 			<Description>US Destination Interface</Description>
 			<Type>write</Type>
 			<Interprete>
@@ -1024,7 +931,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Interprete>
 			<Display>
+				<!-- SuppressValidator 2.7.5 Suppressed -->
 				<RTDisplay>true</RTDisplay>
+				<!-- /SuppressValidator 2.7.5 -->
 			</Display>
 			<Measurement>
 				<Type>discreet</Type>
@@ -1040,6 +949,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>double</Type>
 			</Interprete>
+			<Information>
+				<Subtext>Save unique source</Subtext>
+			</Information>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -1054,15 +966,15 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type width="110">button</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Save To DCF</Display>
+						<Display>Save to DCF</Display>
 						<Value>1</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="500" trending="false">
-			<Name>DVE Table</Name>
+			<Name>dveTable</Name>
 			<Description>DVE Table</Description>
 			<Type>array</Type>
 			<ArrayOptions index="0" options=";naming=/502">
@@ -1091,21 +1003,15 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:501|0-502|1-503|2-504|3,width:100-100-100-100,sort:STRING-STRING-STRING-STRING,lines:20,filter:false">table</Type>
+				<Type options="tab=columns:501|0-502|1-503|2-504|3,width:145-160-159-106,sort:STRING-STRING-STRING-STRING,lines:20,filter:false">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="501" trending="false">
-			<Name>Virtual Element Key</Name>
-			<Description>Virtual Element Key</Description>
+			<Name>dveTableVirtualElementKey</Name>
+			<Description>Virtual Element Key (DVE Table)</Description>
 			<Information>
 				<Text>Virtual Element Key</Text>
 				<Subtext>Virtual Element Key</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1121,17 +1027,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="502" trending="false">
-			<Name>Virtual Element Name</Name>
-			<Description>Virtual Element Name [IDX]</Description>
+			<Name>dveTableVirtualElementName</Name>
+			<Description>Virtual Element Name [IDX] (DVE Table)</Description>
 			<Information>
 				<Text>Virtual Element Name</Text>
 				<Subtext>Virtual Element Name</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1147,8 +1047,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1502" setter="true">
-			<Name>Virtual Element Name</Name>
-			<Description>Virtual Element Name</Description>
+			<Name>dveTableVirtualElementName</Name>
+			<Description>Virtual Element Name (DVE Table)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1156,24 +1056,20 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Interprete>
 			<Display>
+				<!-- SuppressValidator 2.7.5 Suppressed -->
 				<RTDisplay>true</RTDisplay>
+				<!-- /SuppressValidator 2.7.5 -->
 			</Display>
 			<Measurement>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
 		<Param id="503" trending="false" export="true">
-			<Name>Virtual Element Destination</Name>
-			<Description>Virtual Element Destination</Description>
+			<Name>dveTableVirtualElementDestination</Name>
+			<Description>Virtual Element Destination (DVE Table)</Description>
 			<Information>
 				<Text>Virtual Element Destination</Text>
 				<Subtext>Virtual Element Destination</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1206,8 +1102,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1503" export="true" setter="true">
-			<Name>Virtual Element Destination</Name>
-			<Description>Virtual Element Destination</Description>
+			<Name>dveTableVirtualElementDestination</Name>
+			<Description>Virtual Element Destination (DVE Table)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1239,17 +1135,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="504" trending="false">
-			<Name>Virtual Element EleColumn</Name>
-			<Description>Virtual Element EleColumn</Description>
+			<Name>dveTableVirtualElementColumn</Name>
+			<Description>Virtual Element (DVE Table)</Description>
 			<Information>
-				<Text>Virtual Element EleColumn</Text>
-				<Subtext>Virtual Element EleColumn</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
+				<Subtext>Virtual element</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1264,7 +1153,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="510">
 			<Name>BUT_SaveDVEDCF</Name>
 			<Description></Description>
@@ -1274,6 +1163,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>double</Type>
 			</Interprete>
+			<Information>
+				<Subtext>Save DVE DCF</Subtext>
+			</Information>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -1288,26 +1180,20 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type width="110">button</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Save To DCF</Display>
+						<Display>Save to DCF</Display>
 						<Value>1</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<!--DiscreetValues-->
 		<Param id="998" trending="false" save="true">
 			<Name>AllInputs</Name>
-			<Description>AllInputs</Description>
+			<Description>All Inputs</Description>
 			<Information>
-				<Subtext>AllInputs</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
+				<Subtext>All inputs</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1324,15 +1210,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 		</Param>
 		<Param id="999" trending="false" save="true">
 			<Name>AllOutputs</Name>
-			<Description>AllOutputs</Description>
+			<Description>All Outputs</Description>
 			<Information>
-				<Subtext>AllOutputs</Subtext>
-				<Includes>
-					<Include>time</Include>
-					<Include>range</Include>
-					<Include>steps</Include>
-					<Include>units</Include>
-				</Includes>
+				<Subtext>All outputs</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
@@ -1347,11 +1227,11 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<!--ContextMenus-->
 		<Param id="1100" trending="false">
-			<Name>Driver Interfaces_ContextMenu</Name>
-			<Description>Driver Interfaces_ContextMenu</Description>
+			<Name>driverInterfaces_ContextMenu</Name>
+			<Description>Driver Interfaces Context Menu</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1376,7 +1256,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 						<Display>Add Virtual...</Display>
 						<Value>add virt</Value>
 					</Discreet>
-					<Discreet options="table:selection">
+					<Discreet options="table:selection;confirm:Are you sure you want to delete this item?">
 						<Display>Delete Selected</Display>
 						<Value>delete Int</Value>
 					</Discreet>
@@ -1388,8 +1268,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1200" trending="false">
-			<Name>UniqueSourceConnections_ContextMenu</Name>
-			<Description>UniqueSourceConnections_ContextMenu</Description>
+			<Name>uniqueSourceConnections_ContextMenu</Name>
+			<Description>Unique Source Connections Context Menu</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1406,7 +1286,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 						<Display>Add ...</Display>
 						<Value>add connection</Value>
 					</Discreet>
-					<Discreet options="table:selection">
+					<Discreet options="table:selection;confirm:Are you sure you want to delete this item?">
 						<Display>Delete Selected</Display>
 						<Value>delete connection</Value>
 					</Discreet>
@@ -1418,8 +1298,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 			</Measurement>
 		</Param>
 		<Param id="1500" trending="false">
-			<Name>DVE Table_ContextMenu</Name>
-			<Description>DVE Table_ContextMenu</Description>
+			<Name>dveTable_ContextMenu</Name>
+			<Description>DVE Table Context Menu</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1433,10 +1313,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>discreet</Type>
 				<Discreets>
 					<Discreet dependencyValues="99">
-						<Display>Add ...</Display>
+						<Display>Add...</Display>
 						<Value>add dve</Value>
 					</Discreet>
-					<Discreet options="table:selection">
+					<Discreet options="table:selection;confirm:Are you sure you want to delete this item?">
 						<Display>Delete Selected</Display>
 						<Value>delete</Value>
 					</Discreet>
@@ -1447,8 +1327,8 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Discreets>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="2000">
 			<Name>Matrix</Name>
 			<Description>Matrix</Description>
@@ -1465,6 +1345,14 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>double</Type>
 			</Interprete>
+			<Information>
+				<Subtext>Matrix</Subtext>
+			</Information>
+			<!-- SuppressValidator 2.5.1 No default provided -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -2529,9 +2417,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<!-- Sequence for matrix options Number Inputs/Number Outputs/COMin/COMax/CIMin/CIMax -->
 				<Type>matrix</Type>
 			</Measurement>
-
+			
 		</Param>
-
+		
 		<Param id="2002" trending="false">
 			<Name>column</Name>
 			<Description>column</Description>
@@ -2543,10 +2431,10 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<Type>double</Type>
 			</Interprete>
 		</Param>
-
+		
 		<Param id="2003">
-			<Name>Discreet Info</Name>
-			<Description>Discreet Info</Description>
+			<Name>discreetInfo</Name>
+			<Description>Discrete Info</Description>
 			<Type>discreet info</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2557,7 +2445,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<RTDisplay>false</RTDisplay>
 			</Display>
 		</Param>
-
+		
 		<Param id="2004">
 			<Name>BUT_FindInterface</Name>
 			<Description></Description>
@@ -2567,6 +2455,9 @@ DATE		VERSION		AUTHOR			COMMENTS
 				<LengthType>next param</LengthType>
 				<Type>double</Type>
 			</Interprete>
+			<Information>
+				<Subtext>Find interface</Subtext>
+			</Information>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -2587,8 +2478,7 @@ DATE		VERSION		AUTHOR			COMMENTS
 				</Discreets>
 			</Measurement>
 		</Param>
-
-
+		
 		<!--DCFHelper Mapping Parameters-->
 		<Param id="63993">
 			<Name>MAP_StartupElements</Name>
@@ -2774,6 +2664,36 @@ DATE		VERSION		AUTHOR			COMMENTS
 
 	<PortSettings>
 	</PortSettings>
-
+	
+	<VersionHistory>
+		<Branches>
+			<Branch id="1">
+				<Comment />
+				<SystemVersions>
+					<SystemVersion id="0">
+						<MajorVersions>
+							<MajorVersion id="0">
+								<MinorVersions>
+									<MinorVersion id="8">
+										<Date>2022-10-03</Date>
+										<Provider>
+											<Author>JST</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Initial version, converted from Examples/Protocols/DCF version 1.0.0.8.</NewFeature>
+										</Changes>
+										<References>
+											<TaskId>194964</TaskId>
+										</References>
+									</MinorVersion>
+								</MinorVersions>
+							</MajorVersion>
+						</MajorVersions>
+					</SystemVersion>
+				</SystemVersions>
+			</Branch>
+		</Branches>
+	</VersionHistory>
 </Protocol>
 

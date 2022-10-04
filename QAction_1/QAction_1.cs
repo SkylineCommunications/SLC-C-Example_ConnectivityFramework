@@ -1,5 +1,4 @@
 #define debug
-#define DCFv1
 
 namespace ProtocolDCF
 {
@@ -9,7 +8,9 @@ namespace ProtocolDCF
 	using System.Linq;
 	using System.Linq.Expressions;
 	using System.Text;
+
 	using Interop.SLDms;
+
 	using Skyline.DataMiner.Net.Messages;
 	using Skyline.DataMiner.Scripting;
 
@@ -29,7 +30,6 @@ namespace ProtocolDCF
 * Important Note: StyleCop rules SA1307 and SA1401 concerning the usage of public fields cannot be fixed. This is due to reverse compatibility issue. 
 */
 
-	// Note, we are leaving Enumerations outside of the #if DCFv1 otherwise the compiler will remove the entire namespace causing build issues on older DMA's.
 	#region Enumerations
 
 	/// <summary>
@@ -86,22 +86,20 @@ namespace ProtocolDCF
 
 	#endregion Enumerations
 
-#if DCFv1
-
 	#region Structs
 
 	public struct DCFSaveConnectionProperty
 	{
-		private bool async;
-		private bool fixedProperty;
-		private bool full;
-		private string name;
+		private readonly bool async;
+		private readonly bool fixedProperty;
+		private readonly bool full;
+		private readonly string name;
 
-		private bool addToExternalConnection;
+		private readonly bool addToExternalConnection;
 
-		private string type;
+		private readonly string type;
 
-		private string value;
+		private readonly string value;
 
 		public DCFSaveConnectionProperty(string name, string type, string value, bool full = false, bool fixedProperty = false, bool addToExternalConnection = true, bool async = true)
 		{
@@ -160,17 +158,17 @@ namespace ProtocolDCF
 	#region Classes
 
 	/// <summary>
-	/// Objects of this class represent a unique Interface, specified by it's ParameterGroupID. In case of a table, the Key of the table must also be specified. In case of external element, the elementKey (DmaID/EleID) must also be specified.
+	/// Objects of this class represent a unique Interface, specified by its ParameterGroupID. In case of a table, the Key of the table must also be specified. In case of external element, the elementKey (DmaID/EleID) must also be specified.
 	/// </summary>
 	public class DCFDynamicLink
 	{
-		private bool custom;
-		private string elementKey;
-		private bool getAll = false;
-		private string interfaceName;
-		private int parameterGroupID;
+		private readonly bool custom;
+		private readonly string elementKey;
+		private readonly bool getAll = false;
+		private readonly string interfaceName;
+		private readonly int parameterGroupID;
 		private PropertyFilter propertyFilter = null;
-		private string tableKey;
+		private readonly string tableKey;
 
 		// gets all the interfaces
 		public DCFDynamicLink(string elementKey, PropertyFilter propertyFilter = null)
@@ -303,8 +301,8 @@ namespace ProtocolDCF
 	[SuppressMessage("Microsoft.StyleCop.CSharp.MaintainabilityRules", "*", Justification = "Reverse Compatibility")]
 	public class DCFDynamicLinkResult
 	{
-		public ConnectivityInterface[] allInterfaces;
-		public ConnectivityInterface firstInterface;
+		public ConnectivityInterface[] AllInterfaces { get; }
+		public ConnectivityInterface FirstInterface { get; }
 		public DCFDynamicLink link;
 
 		public DCFDynamicLinkResult(DCFDynamicLink link, ConnectivityInterface[] allInterfaces)
@@ -312,13 +310,13 @@ namespace ProtocolDCF
 			this.link = link;
 			if (allInterfaces != null && allInterfaces.Length > 0)
 			{
-				this.allInterfaces = allInterfaces;
-				this.firstInterface = allInterfaces[0];
+				AllInterfaces = allInterfaces;
+				this.FirstInterface = allInterfaces[0];
 			}
 			else
 			{
-				this.allInterfaces = new ConnectivityInterface[0];
-				this.firstInterface = null;
+				AllInterfaces = new ConnectivityInterface[0];
+				this.FirstInterface = null;
 			}
 		}
 	}
@@ -1062,7 +1060,7 @@ namespace ProtocolDCF
 								HashSet<string> foundInterfaces = new HashSet<string>(foundProperties.Select(p => p.Interface.ElementKey + "/" + p.Interface.InterfaceId));
 
 								// Filter Current Results with the found Property Interfaces
-								result[i] = new DCFDynamicLinkResult(result[i].link, result[i].allInterfaces.Where(p => foundInterfaces.Contains(p.ElementKey + "/" + p.InterfaceId)).ToArray());
+								result[i] = new DCFDynamicLinkResult(result[i].link, result[i].AllInterfaces.Where(p => foundInterfaces.Contains(p.ElementKey + "/" + p.InterfaceId)).ToArray());
 							}
 						}
 						catch (Exception e)
@@ -1167,7 +1165,7 @@ namespace ProtocolDCF
 			ConnectivityInterface[] result = new ConnectivityInterface[itfs.Length];
 			for (int i = 0; i < itfs.Length; i++)
 			{
-				result[i] = itfs[i].firstInterface;
+				result[i] = itfs[i].FirstInterface;
 			}
 
 			return result;
@@ -1194,11 +1192,11 @@ namespace ProtocolDCF
 				{
 					try
 					{
-						if (itfs[j].allInterfaces != null)
+						if (itfs[j].AllInterfaces != null)
 						{
-							for (int u = 0; u < itfs[j].allInterfaces.Length; u++)
+							for (int u = 0; u < itfs[j].AllInterfaces.Length; u++)
 							{
-								ConnectivityInterface conInt = itfs[j].allInterfaces[u];
+								ConnectivityInterface conInt = itfs[j].AllInterfaces[u];
 								if (conInt != null)
 									result.Add(conInt);
 							}
@@ -3233,9 +3231,9 @@ namespace ProtocolDCF
 		{
 			var result = dcf.GetInterfaces(source, destination);
 			if (result[0] != null)
-				this.source = result[0].firstInterface;
+				this.source = result[0].FirstInterface;
 			if (result[1] != null)
-				this.destination = result[1].firstInterface;
+				this.destination = result[1].FirstInterface;
 			this.fixedConnection = fixedConnection;
 		}
 
@@ -3544,5 +3542,4 @@ namespace ProtocolDCF
 	}
 
 	#endregion Classes
-#endif
 }

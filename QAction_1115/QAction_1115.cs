@@ -1,30 +1,28 @@
-#define DCFv1
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using Skyline.DataMiner.Scripting;
+
 using ProtocolDCF;
+
+using Skyline.DataMiner.Scripting;
+
 public class QAction
 {
 	/// <summary>
-	/// DCF_Example_InterfaceProperties
+	/// DCF example interface properties.
 	/// </summary>
-	/// <param name="protocol">Link with Skyline Dataminer</param>
+	/// <param name="protocol">Link with SLProtocol process.</param>
 	public static void Run(SLProtocolExt protocol)
 	{
-#if DCFv1
 		int trig = protocol.GetTriggerParameter();
 		DCFMappingOptions opt = new DCFMappingOptions();
 		opt.PIDcurrentInterfaceProperties = Parameter.map_interfaceproperties_63999;
 		opt.HelperType = SyncOption.Custom;
+
 		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
 		{
 			string rowKey = protocol.RowKey();
-			DriverInterfacesQActionRow row = protocol.driverInterfaces[rowKey];
-			int parameterGroupID = Convert.ToInt32(row.DifType_113);
-			string propertyType = "";
+			DriverinterfacesQActionRow row = protocol.driverinterfaces[rowKey];
+			int parameterGroupID = Convert.ToInt32(row.Driverinterfacestype_113);
+			string propertyType = String.Empty;
 
 			switch (parameterGroupID)
 			{
@@ -39,7 +37,7 @@ public class QAction
 					break;
 			}
 
-			var foundInterface = dcf.GetInterfaces(new DCFDynamicLink(parameterGroupID, rowKey))[0].firstInterface;
+			var foundInterface = dcf.GetInterfaces(new DCFDynamicLink(parameterGroupID, rowKey))[0].FirstInterface;
 			string propertyName;
 			string propertyValue;
 			if (trig == 1115)
@@ -54,6 +52,5 @@ public class QAction
 			propertyValue = Convert.ToString(protocol.GetParameter(trig));
 			dcf.SaveInterfaceProperties(foundInterface, false, new ConnectivityInterfaceProperty() { InterfacePropertyName = propertyName, InterfacePropertyType = propertyType, InterfacePropertyValue = propertyValue });
 		}
-#endif
 	}
 }

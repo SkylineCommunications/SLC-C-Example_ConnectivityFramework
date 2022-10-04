@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1CEF187D-D809-407B-9DB5-341899B3F474}</ProjectGuid>
+    <ProjectGuid>{ACCE92A1-A124-4567-81D4-C34BF87C4134}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QAction_1115</RootNamespace>
@@ -41,15 +41,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj">
-      <Project>{49273970-A039-4EC9-9F3D-AEF738436DA9}</Project>
+      <Project>{DBBE85AF-8860-4885-943D-2EFE3EA13FBD}</Project>
       <Name>QAction_Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\QAction_ClassLibrary\QAction_ClassLibrary.csproj">
-      <Project>{83BD84C6-6647-43CF-B63E-41846D2AD1A4}</Project>
+      <Project>{3AB9831F-9D6E-462B-81FC-67CA23B26A1B}</Project>
       <Name>QAction_ClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\QAction_1\QAction_1.csproj">
-      <Project>{767A59B3-287E-4B91-A075-58363E4CB5F0}</Project>
+      <Project>{B27C3F2A-CB7A-427A-AD7B-F3A2DB7AACE0}</Project>
       <Name>QAction_1</Name>
     </ProjectReference>
     <AdditionalFiles Include="stylecop.json" />
