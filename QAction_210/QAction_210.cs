@@ -34,14 +34,17 @@ public class QAction
 			opt.HelperType = SyncOption.EndOfPolling;
 			opt.PIDcurrentConnections = Parameter.map_connections_63998;
 			opt.PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997;
+
 			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
 			{
 				List<DCFSaveConnectionRequest> allConnectionRequests = new List<DCFSaveConnectionRequest>();
+
 				for (int i = 0; i < sourceInterfacesO.Length; i++)
 				{
 					string sourceKey = Convert.ToString(sourceInterfacesO[i]);
 					string destinationKey = Convert.ToString(destinationInterfacesO[i]);
 					int src_parameterGroupID;
+
 					if (mapInterfaceType.TryGetValue(sourceKey, out src_parameterGroupID))
 					{
 						//SourceType tells us the ParameterGroupID for this Example Driver
@@ -79,7 +82,7 @@ public class QAction
 
 				DCFSaveConnectionResult[] results = dcf.SaveConnections(allConnectionRequests.ToArray());
 
-				//Making some Dummy Properties
+				// Making some Dummy Properties.
 				Random r = new Random();
 				for (int i = 0; i < results.Length; i++)
 				{

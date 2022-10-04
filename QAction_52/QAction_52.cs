@@ -23,6 +23,7 @@ public class QAction
 
 			// Fixed Properties and Fixed Connections = Remove Everything yourself
 			ConnectivityInterface sourceInterface = sourceInterfaces[0].FirstInterface;
+
 			if (sourceInterface != null)
 			{
 				var connections = sourceInterface.GetConnections(); // returns all connection where the given Interface is the SOURCE interface

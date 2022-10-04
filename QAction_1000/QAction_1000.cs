@@ -156,6 +156,7 @@ public class QAction
 			int? firstAvailable = Enumerable.Range(1, int.MaxValue)
 								.Except(primaryKeys)
 								.FirstOrDefault();
+
 			if (firstAvailable != null)
 				newId = Convert.ToInt32(firstAvailable);
 		}

@@ -41,15 +41,15 @@ DCF Example - DVE
 		// Setting a DCFHelper StartupCheckPID will perform startup checks for all defined elements if they haven't already been performed
 		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
 		{
-			// Creating static connections from virtual A to out A1 and A2 and Virtual B to out B1 and B2 These will never be automatically cleared
-			// Static connections from virtual A(9) to A1(4) and A2 (5)
+			// Creating static connections from virtual A to out A1 and A2 and Virtual B to out B1 and B2. These will never be automatically cleared.
+			// Static connections from virtual A(9) to A1(4) and A2 (5).
 			DCFSaveConnectionRequest[] allConnections_A = new DCFSaveConnectionRequest[]
 			{
 				new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(9), new DCFDynamicLink(4),SaveConnectionType.Unique_Name,"Fixed A1",true),
 				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(9),new DCFDynamicLink(5),SaveConnectionType.Unique_Name,"Fixed A2",true)
 			};
 
-			// by setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling
+			// By setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling.
 			var resultA = dcf.SaveConnections(allConnections_A);
 
 			// Static connections from virtual B(10) to B1(6) and B2 (7)
@@ -59,10 +59,10 @@ DCF Example - DVE
 				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(10),new DCFDynamicLink(7),SaveConnectionType.Unique_Name,"Fixed B2",true)
 			};
 
-			// by setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling
+			// By setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling
 			var resultB = dcf.SaveConnections(allConnections_B);
 
-			// Add some static Properties
+			// Add some static Properties.
 			foreach (var res in resultA)
 			{
 				if (res.sourceConnection != null)
