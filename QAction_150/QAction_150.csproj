@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5910898-063F-4DD3-8552-4E19E781EAD8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QAction_150</RootNamespace>
+    <AssemblyName>QAction_150</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\Internal\Code Analysis\qaction-debug.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\QAction_150.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\Internal\Code Analysis\qaction-release.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\QAction_150.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj">
+      <Project>{49273970-A039-4EC9-9F3D-AEF738436DA9}</Project>
+      <Name>QAction_Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QAction_ClassLibrary\QAction_ClassLibrary.csproj">
+      <Project>{83BD84C6-6647-43CF-B63E-41846D2AD1A4}</Project>
+      <Name>QAction_ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QAction_1\QAction_1.csproj">
+      <Project>{767A59B3-287E-4B91-A075-58363E4CB5F0}</Project>
+      <Name>QAction_1</Name>
+    </ProjectReference>
+    <AdditionalFiles Include="stylecop.json" />
+    <Content Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QAction_150.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Skyline.DataMiner.Dev.Protocol">
+      <Version>10.0.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers">
+      <Version>1.1.118</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties DisLinkId="150" DisProjectType="qactionProject" DisLinkedXmlFile="..\protocol.xml" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

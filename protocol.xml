@@ -1,0 +1,2779 @@
+﻿<?xml version="1.0" encoding="utf-8"?><!--
+****************************************************************************
+*  Copyright (c) 2018,  Skyline Communications NV  All Rights Reserved.    *
+****************************************************************************
+
+By using this driver, you expressly agree with the usage terms and
+conditions set out below.
+This driver and all related materials are protected by copyrights and
+other intellectual property rights that exclusively belong
+to Skyline Communications.
+
+A user license granted for this driver is strictly for personal use only.
+This driver may not be used in any way by anyone without the prior
+written consent of Skyline Communications. Any sublicensing of this
+driver is forbidden.
+
+Any modifications to this driver by the user are only allowed for
+personal use and within the intended purpose of the driver,
+and will remain the sole responsibility of the user.
+Skyline Communications will not be responsible for any damages or
+malfunctions whatsoever of the driver resulting from a modification
+or adaptation by the user.
+
+The content of this driver is confidential information.
+The user hereby agrees to keep this confidential information strictly
+secret and confidential and not to disclose or reveal it, in whole
+or in part, directly or indirectly to any person, entity, organization
+or administration without the prior written consent of
+Skyline Communications.
+
+Any inquiries can be addressed to:
+
+	Skyline Communications NV
+	Ambachtenstraat 33
+	B-8870 Izegem
+	Belgium
+	Tel.	: +32 51 31 35 69
+	Fax.	: +32 51 31 01 29
+	E-mail	: info@skyline.be 
+	Web		: www.skyline.be
+	Contact	: Ben Vandenberghe
+
+****************************************************************************
+Revision History:
+
+DATE		VERSION		AUTHOR			COMMENTS
+
+28/09/2015	1.0.0.1	JST, Skyline	Initial Version
+23/02/2016	1.0.0.2	JST, Skyline	DCFHelper version 1.0.0.4
+23/09/2016  1.0.0.3 JST, Skyline	DCFHelper version 1.0.0.5
+04/10/2016	1.0.0.4	JST, Skyline	DCFHelper version 1.0.0.6
+04/10/2016	1.0.0.5	JST, Skyline	DCFHelper version 1.0.0.7
+02/12/2016	1.0.0.6	JST, Skyline	DCFHelper version 1.0.0.8
+13/02/2018	1.0.0.7	JST, Skyline	DCFHelper version 1.0.0.9
+12/10/2018	1.0.0.8	JST, Skyline	Added Matrix Example and DCFHelper Version 1.0.0.10
+****************************************************************************
+
+-->
+
+<Protocol xmlns="http://www.skyline.be/protocol">
+	<Name>Skyline Example Simple DCF</Name>
+	<Description>DataMiner Connectivity Framework</Description>
+	<Version>1.0.0.8</Version>
+	<Provider>Skyline Communications</Provider>
+	<Vendor>Skyline</Vendor>
+	<VendorOID>1.3.6.1.4.1.8813.2.XX</VendorOID>
+	<DeviceOID>XX</DeviceOID>
+	<ElementType>Virtual</ElementType>
+	<Type relativeTimers="true" options="exportProtocol:DCF Virtual Element:500">virtual</Type>
+	<Display defaultPage="" pageOrder="Help;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;DCF Example - Get Interfaces;Matrix;Matrix2" wideColumnPages="Help" />
+	<SNMP includepages="true">auto</SNMP>
+
+	<ParameterGroups>
+		<Group id="1" name="Fixed Input Port A" type="in" />
+		<Group id="2" name="Fixed Input Port B" type="in" />
+		<Group id="4" name="Fixed Output Port A1" type="out" />
+		<Group id="5" name="Fixed Output Port A2" type="out" />
+		<Group id="6" name="Fixed Output Port B1" type="out" />
+		<Group id="7" name="Fixed Output Port B2" type="out" />
+		<Group id="9" name="Virtual Output Port A" type="inout" />
+		<Group id="10" name="Virtual Output Port B" type="inout" />
+
+		<Group id="100" name="Dynamic Table IN" type="in" dynamicId="100" dynamicIndex="I_*" />
+		<Group id="101" name="Dynamic Table OUT" type="out" dynamicId="100" dynamicIndex="O_*" />
+		<Group id="102" name="Dynamic Table VIRTUAL" type="inout" dynamicId="100" dynamicIndex="V_*" />
+
+		<Group id="500" name="Port 1/1" type="in" dynamicId="500" dynamicIndex="*" />
+		<Group id="501" name="Port 2/1" type="out" dynamicId="500" dynamicIndex="*" />
+		<Group id="502" name="Port 2/2" type="out" dynamicId="500" dynamicIndex="*" />
+
+		<Group id="600" name="Matrix" type="inout" dynamicId="2000" dynamicIndex="*" dynamicUsePK="true" />
+		<!--Warning, all id's must stay below 10 000-->
+	</ParameterGroups>
+
+	<Params>
+
+		<Param id="1" trending="false">
+			<Name>Help</Name>
+			<Description>Driver Help</Description>
+			<Information>
+				<Text>Driver Help</Text>
+				<Subtext>Comments on how to use this driver.</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Help</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type lines="25">string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2">
+			<Name>QA_AfterStartup</Name>
+			<Description>QA_AfterStartup</Description>
+			<Type>dummy</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+
+		<Param id="50" trending="false">
+			<Name>Mode</Name>
+			<Description>Mode</Description>
+			<Information>
+				<Subtext>Indicates if the card is working as a dual channel distribution amplifier. (using only one source, or using multiple sources) (A to A and B  or B to A and B)</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>1-Channel</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>2-Channel</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="51" trending="false">
+			<Name>Input Selection</Name>
+			<Description>Input Selection</Description>
+			<Information>
+				<Subtext>Indicates the way the inputs are used. A to A and B to B  or  A to B and B to A</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Normal</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Crossed</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1050" setter="true">
+			<Name>Mode</Name>
+			<Description>Mode</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>togglebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>1-Channel</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>2-Channel</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1051" setter="true">
+			<Name>Input Selection</Name>
+			<Description>Input Selection</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>togglebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Normal</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Crossed</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+
+		<Param id="52">
+			<Name>BUT_RemoveVirtualAConnections</Name>
+			<Description></Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>2</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Remove Virtual A Connection</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="53" trending="false" save="true">
+			<Name>Connection Filter</Name>
+			<Description>Connection Filter</Description>
+			<Information>
+				<Subtext>This is a Value saved with a connection that can be used by the DataMiner Client to perform Path Highlighting in Visio's that have the same filter.</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+				<DefaultValue>FilterValue1;FilterValue2;FilterValue3</DefaultValue>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>4</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1053" setter="true">
+			<Name>Connection Filter</Name>
+			<Description>Connection Filter</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Fixed Interfaces</Page>
+						<Row>4</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<!--ContextMenuValues-->
+		<Param id="96" trending="false">
+			<Name>context_KeyOutput</Name>
+			<Description>Unique Output Interface Key</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="999"></Discreets>
+			</Measurement>
+		</Param>
+		<Param id="97" trending="false">
+			<Name>context_KeyInput</Name>
+			<Description>Unique Input Interface Key</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="998"></Discreets>
+			</Measurement>
+		</Param>
+		<Param id="98" trending="false">
+			<Name>context_CMTS Name</Name>
+			<Description>CMTS Name</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="99" trending="false">
+			<Name>context_Key</Name>
+			<Description>Unique Table Key</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<!--Dynamic Table Interfaces-->
+		<Param id="100" trending="false">
+			<Name>Driver Interfaces</Name>
+			<Description>Driver Interfaces</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0" options=";naming=/112">
+				<ColumnOption idx="0" pid="111" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="112" type="retrieved" options=";save" />
+				<ColumnOption idx="2" pid="113" type="retrieved" options=";save" />
+				<ColumnOption idx="3" pid="114" type="retrieved" options=";save" />
+				<ColumnOption idx="4" pid="115" type="retrieved" options=";save" />
+				<ColumnOption idx="5" pid="116" type="retrieved" options=";save" />
+			</ArrayOptions>
+			<Information>
+				<Text>Interfaces</Text>
+				<Subtext>Interfaces</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Table Interfaces</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:111|0-112|1-113|2-114|3-115|4-116|5,width:100-100-100-100-120-120,sort:STRING-STRING-STRING-STRING-STRING-STRING,lines:20,filter:false">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="111" trending="false">
+			<Name>DIf Key</Name>
+			<Description>DIf Key</Description>
+			<Information>
+				<Text>Interface Key</Text>
+				<Subtext>Interface Key</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="112" trending="false">
+			<Name>DIf Description [IDX]</Name>
+			<Description>DIf Description [IDX]</Description>
+			<Information>
+				<Text>Interface Description</Text>
+				<Subtext>Interface Description</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="113" trending="false">
+			<Name>DIf Type</Name>
+			<Description>DIf Type</Description>
+			<Information>
+				<Text>Interface Type</Text>
+				<Subtext>Interface Type</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Virtual</Display>
+						<Value>102</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input</Display>
+						<Value>100</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output</Display>
+						<Value>101</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="114" trending="false">
+			<Name>DIf Interface State</Name>
+			<Description>DIf Interface State</Description>
+			<Information>
+				<Text>Interface State</Text>
+				<Subtext>Interface State</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CH></CH>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>DOWN</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>UP</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1114" setter="true">
+			<Name>DIf Interface State</Name>
+			<Description>DIf Interface State</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>DOWN</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>UP</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="115" trending="false">
+			<Name>Interface Property A</Name>
+			<Description>Interface Property A</Description>
+			<Information>
+				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="116" trending="false">
+			<Name>Interface Property B</Name>
+			<Description>Interface Property B</Description>
+			<Information>
+				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1115" setter="true">
+			<Name>Interface Property A</Name>
+			<Description>Interface Property A</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1116" setter="true">
+			<Name>Interface Property B</Name>
+			<Description>Interface Property B</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="149">
+			<Name>PB_GetInterfaces</Name>
+			<Description></Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Table Interfaces</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">pagebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Get Interfaces ...</Display>
+						<Value>Get Interfaces</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="150">
+			<Name>BUT_GetInterfacesFromDCF</Name>
+			<Description></Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Dependencies>
+				<Id>152</Id>
+				<Id>153</Id>
+			</Dependencies>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>2</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="140">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Get Interfaces (DCF Data)</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+
+		<Param id="151" trending="false">
+			<Name>Get Interfaces Result</Name>
+			<Description>Get Interfaces Result</Description>
+			<Information>
+				<Subtext>This displays the result from trying to retrieve the interfaces from DCF data</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>0</Row>
+						<Column>1</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type lines="10">string</Type>
+			</Measurement>
+		</Param>
+
+
+		<Param id="152" trending="false">
+			<Name>PropertyNameGetInterfaces</Name>
+			<Description>Property Name (Get Interfaces)</Description>
+			<Information>
+				<Subtext>Property Name</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="153" trending="false">
+			<Name>PropertyValueGetInterfaces</Name>
+			<Description>Property Value (Get Interfaces)</Description>
+			<Information>
+				<Subtext>Property Value</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1152" setter="true">
+			<Name>PropertyNameGetInterfaces</Name>
+			<Description>Property Name (Get Interfaces)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1153" setter="true">
+			<Name>PropertyValueGetInterfaces</Name>
+			<Description>Property Value (Get Interfaces)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+
+		<Param id="200" trending="false">
+			<Name>UniqueSourceConnections</Name>
+			<Description>UniqueSourceConnections</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="201" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="202" type="retrieved" options=";save" />
+			</ArrayOptions>
+			<Information>
+				<Text>Interfaces</Text>
+				<Subtext>Interfaces</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Unique Source</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:201|0-202|1,width:100-100,sort:STRING-STRING,lines:20,filter:false">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="201" trending="false">
+			<Name>US Source Interface</Name>
+			<Description>US Source Interface [IDX]</Description>
+			<Information>
+				<Text>US Source Interface</Text>
+				<Subtext>US Source Interface</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="202" trending="false">
+			<Name>US Destination Interface</Name>
+			<Description>US Destination Interface</Description>
+			<Information>
+				<Text>US Destination Interface</Text>
+				<Subtext>US Destination Interface</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1202">
+			<Name>US Destination Interface</Name>
+			<Description>US Destination Interface</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="999"></Discreets>
+			</Measurement>
+		</Param>
+		<Param id="210">
+			<Name>BUT_SaveUniqueSource</Name>
+			<Description></Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - Unique Source</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Save To DCF</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+
+		<Param id="500" trending="false">
+			<Name>DVE Table</Name>
+			<Description>DVE Table</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0" options=";naming=/502">
+				<ColumnOption idx="0" pid="501" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="502" type="retrieved" options=";save" />
+				<ColumnOption idx="2" pid="503" type="retrieved" options=";save" />
+				<ColumnOption idx="3" pid="504" type="retrieved" options=";element" />
+			</ArrayOptions>
+			<Information>
+				<Text>Interfaces</Text>
+				<Subtext>Interfaces</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - DVE</Page>
+						<Row>1</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:501|0-502|1-503|2-504|3,width:100-100-100-100,sort:STRING-STRING-STRING-STRING,lines:20,filter:false">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="501" trending="false">
+			<Name>Virtual Element Key</Name>
+			<Description>Virtual Element Key</Description>
+			<Information>
+				<Text>Virtual Element Key</Text>
+				<Subtext>Virtual Element Key</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="502" trending="false">
+			<Name>Virtual Element Name</Name>
+			<Description>Virtual Element Name [IDX]</Description>
+			<Information>
+				<Text>Virtual Element Name</Text>
+				<Subtext>Virtual Element Name</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1502" setter="true">
+			<Name>Virtual Element Name</Name>
+			<Description>Virtual Element Name</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="503" trending="false" export="true">
+			<Name>Virtual Element Destination</Name>
+			<Description>Virtual Element Destination</Description>
+			<Information>
+				<Text>Virtual Element Destination</Text>
+				<Subtext>Virtual Element Destination</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Output Port 2/1</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output Port 2/2</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1503" export="true" setter="true">
+			<Name>Virtual Element Destination</Name>
+			<Description>Virtual Element Destination</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>togglebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Output Port 2/1</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output Port 2/2</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="504" trending="false">
+			<Name>Virtual Element EleColumn</Name>
+			<Description>Virtual Element EleColumn</Description>
+			<Information>
+				<Text>Virtual Element EleColumn</Text>
+				<Subtext>Virtual Element EleColumn</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="510">
+			<Name>BUT_SaveDVEDCF</Name>
+			<Description></Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>DCF Example - DVE</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Save To DCF</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+
+
+		<!--DiscreetValues-->
+		<Param id="998" trending="false" save="true">
+			<Name>AllInputs</Name>
+			<Description>AllInputs</Description>
+			<Information>
+				<Subtext>AllInputs</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="999" trending="false" save="true">
+			<Name>AllOutputs</Name>
+			<Description>AllOutputs</Description>
+			<Information>
+				<Subtext>AllOutputs</Subtext>
+				<Includes>
+					<Include>time</Include>
+					<Include>range</Include>
+					<Include>steps</Include>
+					<Include>units</Include>
+				</Includes>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<!--ContextMenus-->
+		<Param id="1100" trending="false">
+			<Name>Driver Interfaces_ContextMenu</Name>
+			<Description>Driver Interfaces_ContextMenu</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet dependencyValues="99">
+						<Display>Add Input...</Display>
+						<Value>add inp</Value>
+					</Discreet>
+					<Discreet dependencyValues="99">
+						<Display>Add Output...</Display>
+						<Value>add out</Value>
+					</Discreet>
+					<Discreet dependencyValues="99">
+						<Display>Add Virtual...</Display>
+						<Value>add virt</Value>
+					</Discreet>
+					<Discreet options="table:selection">
+						<Display>Delete Selected</Display>
+						<Value>delete Int</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Clear Table</Display>
+						<Value>clear Int</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1200" trending="false">
+			<Name>UniqueSourceConnections_ContextMenu</Name>
+			<Description>UniqueSourceConnections_ContextMenu</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet dependencyValues="97">
+						<Display>Add ...</Display>
+						<Value>add connection</Value>
+					</Discreet>
+					<Discreet options="table:selection">
+						<Display>Delete Selected</Display>
+						<Value>delete connection</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Clear Table</Display>
+						<Value>clear</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1500" trending="false">
+			<Name>DVE Table_ContextMenu</Name>
+			<Description>DVE Table_ContextMenu</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet dependencyValues="99">
+						<Display>Add ...</Display>
+						<Value>add dve</Value>
+					</Discreet>
+					<Discreet options="table:selection">
+						<Display>Delete Selected</Display>
+						<Value>delete</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Clear Table</Display>
+						<Value>clear</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+
+
+		<Param id="2000">
+			<Name>Matrix</Name>
+			<Description>Matrix</Description>
+			<Type options="dimensions=128,128;columntypes=2002:0-127">array</Type>
+			<!--
+		help on options:
+			the different options are separated with a ';'
+			- dimensions:	row,column
+			- columntype:	2:0-20,35|3:21-34,36
+				where the number before the : specifies the parameter id and the numbers behind the columns (0 based)
+	-->
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Matrix</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<!-- Sequence for matrix options Number Inputs/Number Outputs/COMin/COMax/CIMin/CIMax -->
+				<Type link="labels.xml" options="matrix=128,128,0,1,0,1">matrix</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Input 1</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 2</Display>
+						<Value>2</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 3</Display>
+						<Value>3</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 4</Display>
+						<Value>4</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 5</Display>
+						<Value>5</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 6</Display>
+						<Value>6</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 7</Display>
+						<Value>7</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 8</Display>
+						<Value>8</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 9</Display>
+						<Value>9</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 10</Display>
+						<Value>10</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 11</Display>
+						<Value>11</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 12</Display>
+						<Value>12</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 13</Display>
+						<Value>13</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 14</Display>
+						<Value>14</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 15</Display>
+						<Value>15</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 16</Display>
+						<Value>16</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 17</Display>
+						<Value>17</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 18</Display>
+						<Value>18</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 19</Display>
+						<Value>19</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 20</Display>
+						<Value>20</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 21</Display>
+						<Value>21</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 22</Display>
+						<Value>22</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 23</Display>
+						<Value>23</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 24</Display>
+						<Value>24</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 25</Display>
+						<Value>25</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 26</Display>
+						<Value>26</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 27</Display>
+						<Value>27</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 28</Display>
+						<Value>28</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 29</Display>
+						<Value>29</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 30</Display>
+						<Value>30</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 31</Display>
+						<Value>31</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 32</Display>
+						<Value>32</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 33</Display>
+						<Value>33</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 34</Display>
+						<Value>34</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 35</Display>
+						<Value>35</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 36</Display>
+						<Value>36</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 37</Display>
+						<Value>37</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 38</Display>
+						<Value>38</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 39</Display>
+						<Value>39</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 40</Display>
+						<Value>40</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 41</Display>
+						<Value>41</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 42</Display>
+						<Value>42</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 43</Display>
+						<Value>43</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 44</Display>
+						<Value>44</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 45</Display>
+						<Value>45</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 46</Display>
+						<Value>46</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 47</Display>
+						<Value>47</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 48</Display>
+						<Value>48</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 49</Display>
+						<Value>49</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 50</Display>
+						<Value>50</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 51</Display>
+						<Value>51</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 52</Display>
+						<Value>52</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 53</Display>
+						<Value>53</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 54</Display>
+						<Value>54</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 55</Display>
+						<Value>55</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 56</Display>
+						<Value>56</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 57</Display>
+						<Value>57</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 58</Display>
+						<Value>58</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 59</Display>
+						<Value>59</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 60</Display>
+						<Value>60</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 61</Display>
+						<Value>61</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 62</Display>
+						<Value>62</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 63</Display>
+						<Value>63</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 64</Display>
+						<Value>64</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 65</Display>
+						<Value>65</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 66</Display>
+						<Value>66</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 67</Display>
+						<Value>67</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 68</Display>
+						<Value>68</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 69</Display>
+						<Value>69</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 70</Display>
+						<Value>70</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 71</Display>
+						<Value>71</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 72</Display>
+						<Value>72</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 73</Display>
+						<Value>73</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 74</Display>
+						<Value>74</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 75</Display>
+						<Value>75</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 76</Display>
+						<Value>76</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 77</Display>
+						<Value>77</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 78</Display>
+						<Value>78</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 79</Display>
+						<Value>79</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 80</Display>
+						<Value>80</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 81</Display>
+						<Value>81</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 82</Display>
+						<Value>82</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 83</Display>
+						<Value>83</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 84</Display>
+						<Value>84</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 85</Display>
+						<Value>85</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 86</Display>
+						<Value>86</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 87</Display>
+						<Value>87</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 88</Display>
+						<Value>88</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 89</Display>
+						<Value>89</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 90</Display>
+						<Value>90</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 91</Display>
+						<Value>91</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 92</Display>
+						<Value>92</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 93</Display>
+						<Value>93</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 94</Display>
+						<Value>94</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 95</Display>
+						<Value>95</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 96</Display>
+						<Value>96</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 97</Display>
+						<Value>97</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 98</Display>
+						<Value>98</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 99</Display>
+						<Value>99</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 100</Display>
+						<Value>100</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 101</Display>
+						<Value>101</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 102</Display>
+						<Value>102</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 103</Display>
+						<Value>103</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 104</Display>
+						<Value>104</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 105</Display>
+						<Value>105</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 106</Display>
+						<Value>106</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 107</Display>
+						<Value>107</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 108</Display>
+						<Value>108</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 109</Display>
+						<Value>109</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 110</Display>
+						<Value>110</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 111</Display>
+						<Value>111</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 112</Display>
+						<Value>112</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 113</Display>
+						<Value>113</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 114</Display>
+						<Value>114</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 115</Display>
+						<Value>115</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 116</Display>
+						<Value>116</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 117</Display>
+						<Value>117</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 118</Display>
+						<Value>118</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 119</Display>
+						<Value>119</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 120</Display>
+						<Value>120</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 121</Display>
+						<Value>121</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 122</Display>
+						<Value>122</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 123</Display>
+						<Value>123</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 124</Display>
+						<Value>124</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 125</Display>
+						<Value>125</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 126</Display>
+						<Value>126</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 127</Display>
+						<Value>127</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Input 128</Display>
+						<Value>128</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 1</Display>
+						<Value>129</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 2</Display>
+						<Value>130</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 3</Display>
+						<Value>131</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 4</Display>
+						<Value>132</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 5</Display>
+						<Value>133</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 6</Display>
+						<Value>134</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 7</Display>
+						<Value>135</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 8</Display>
+						<Value>136</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 9</Display>
+						<Value>137</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 10</Display>
+						<Value>138</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 11</Display>
+						<Value>139</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 12</Display>
+						<Value>140</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 13</Display>
+						<Value>141</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 14</Display>
+						<Value>142</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 15</Display>
+						<Value>143</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 16</Display>
+						<Value>144</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 17</Display>
+						<Value>145</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 18</Display>
+						<Value>146</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 19</Display>
+						<Value>147</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 20</Display>
+						<Value>148</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 21</Display>
+						<Value>149</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 22</Display>
+						<Value>150</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 23</Display>
+						<Value>151</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 24</Display>
+						<Value>152</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 25</Display>
+						<Value>153</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 26</Display>
+						<Value>154</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 27</Display>
+						<Value>155</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 28</Display>
+						<Value>156</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 29</Display>
+						<Value>157</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 30</Display>
+						<Value>158</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 31</Display>
+						<Value>159</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 32</Display>
+						<Value>160</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 33</Display>
+						<Value>161</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 34</Display>
+						<Value>162</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 35</Display>
+						<Value>163</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 36</Display>
+						<Value>164</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 37</Display>
+						<Value>165</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 38</Display>
+						<Value>166</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 39</Display>
+						<Value>167</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 40</Display>
+						<Value>168</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 41</Display>
+						<Value>169</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 42</Display>
+						<Value>170</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 43</Display>
+						<Value>171</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 44</Display>
+						<Value>172</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 45</Display>
+						<Value>173</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 46</Display>
+						<Value>174</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 47</Display>
+						<Value>175</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 48</Display>
+						<Value>176</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 49</Display>
+						<Value>177</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 50</Display>
+						<Value>178</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 51</Display>
+						<Value>179</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 52</Display>
+						<Value>180</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 53</Display>
+						<Value>181</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 54</Display>
+						<Value>182</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 55</Display>
+						<Value>183</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 56</Display>
+						<Value>184</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 57</Display>
+						<Value>185</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 58</Display>
+						<Value>186</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 59</Display>
+						<Value>187</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 60</Display>
+						<Value>188</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 61</Display>
+						<Value>189</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 62</Display>
+						<Value>190</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 63</Display>
+						<Value>191</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 64</Display>
+						<Value>192</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 65</Display>
+						<Value>193</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 66</Display>
+						<Value>194</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 67</Display>
+						<Value>195</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 68</Display>
+						<Value>196</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 69</Display>
+						<Value>197</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 70</Display>
+						<Value>198</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 71</Display>
+						<Value>199</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 72</Display>
+						<Value>200</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 73</Display>
+						<Value>201</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 74</Display>
+						<Value>202</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 75</Display>
+						<Value>203</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 76</Display>
+						<Value>204</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 77</Display>
+						<Value>205</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 78</Display>
+						<Value>206</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 79</Display>
+						<Value>207</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 80</Display>
+						<Value>208</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 81</Display>
+						<Value>209</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 82</Display>
+						<Value>210</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 83</Display>
+						<Value>211</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 84</Display>
+						<Value>212</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 85</Display>
+						<Value>213</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 86</Display>
+						<Value>214</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 87</Display>
+						<Value>215</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 88</Display>
+						<Value>216</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 89</Display>
+						<Value>217</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 90</Display>
+						<Value>218</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 91</Display>
+						<Value>219</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 92</Display>
+						<Value>220</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 93</Display>
+						<Value>221</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 94</Display>
+						<Value>222</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 95</Display>
+						<Value>223</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 96</Display>
+						<Value>224</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 97</Display>
+						<Value>225</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 98</Display>
+						<Value>226</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 99</Display>
+						<Value>227</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 100</Display>
+						<Value>228</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 101</Display>
+						<Value>229</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 102</Display>
+						<Value>230</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 103</Display>
+						<Value>231</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 104</Display>
+						<Value>232</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 105</Display>
+						<Value>233</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 106</Display>
+						<Value>234</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 107</Display>
+						<Value>235</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 108</Display>
+						<Value>236</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 109</Display>
+						<Value>237</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 110</Display>
+						<Value>238</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 111</Display>
+						<Value>239</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 112</Display>
+						<Value>240</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 113</Display>
+						<Value>241</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 114</Display>
+						<Value>242</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 115</Display>
+						<Value>243</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 116</Display>
+						<Value>244</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 117</Display>
+						<Value>245</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 118</Display>
+						<Value>246</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 119</Display>
+						<Value>247</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 120</Display>
+						<Value>248</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 121</Display>
+						<Value>249</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 122</Display>
+						<Value>250</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 123</Display>
+						<Value>251</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 124</Display>
+						<Value>252</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 125</Display>
+						<Value>253</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 126</Display>
+						<Value>254</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 127</Display>
+						<Value>255</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Output 128</Display>
+						<Value>256</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="2001">
+			<Name>Matrix</Name>
+			<Description>Matrix</Description>
+			<Type options="dimensions=128,128;columntypes=2002:0-127">write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Matrix</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<!-- Sequence for matrix options Number Inputs/Number Outputs/COMin/COMax/CIMin/CIMax -->
+				<Type>matrix</Type>
+			</Measurement>
+
+		</Param>
+
+		<Param id="2002" trending="false">
+			<Name>column</Name>
+			<Description>column</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>unsigned number</RawType>
+				<LengthType>fixed</LengthType>
+				<Length>1</Length>
+				<Type>double</Type>
+			</Interprete>
+		</Param>
+
+		<Param id="2003">
+			<Name>Discreet Info</Name>
+			<Description>Discreet Info</Description>
+			<Type>discreet info</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+
+		<Param id="2004">
+			<Name>BUT_FindInterface</Name>
+			<Description></Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<LengthType>next param</LengthType>
+				<Type>double</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Matrix2</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Find Matrix Interface</Display>
+						<Value>Find</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+
+
+		<!--DCFHelper Mapping Parameters-->
+		<Param id="63993">
+			<Name>MAP_StartupElements</Name>
+			<Description>MAP_StartupElements</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+		<Param id="63994">
+			<Name>MAP_NewConnectionProperties</Name>
+			<Description>MAP_NewConnectionProperties</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+		<Param id="63995">
+			<Name>MAP_NewConnections</Name>
+			<Description>MAP_NewConnections</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+		<Param id="63996">
+			<Name>MAP_NewInterfaceProperties</Name>
+			<Description>MAP_NewInterfaceProperties</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+		<Param id="63997" save="true">
+			<Name>MAP_ConnectionProperties</Name>
+			<Description>MAP_ConnectionProperties</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+		<Param id="63998" save="true">
+			<Name>MAP_Connections</Name>
+			<Description>MAP_Connections</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+		<Param id="63999" save="true">
+			<Name>MAP_InterfaceProperties</Name>
+			<Description>MAP_InterfaceProperties</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<LengthType>next param</LengthType>
+				<Type>string</Type>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+		</Param>
+	</Params>
+
+	<QActions>
+
+		<QAction id="1" name="DCFHelper" encoding="csharp" options="precompile">
+			
+		</QAction>
+
+		<QAction id="2" name="AfterStartup" encoding="csharp" triggers="2">
+			
+		</QAction>
+		<QAction id="50" name="DCF_Example_ModeSelectionChange" encoding="csharp" triggers="50;51;1053">
+			
+		</QAction>
+		<QAction id="52" name="DCF_Example_RemoveFixedConnection" encoding="csharp" triggers="52">
+			
+		</QAction>
+
+		<QAction id="150" name="DCF_Example_GetInterfaces" encoding="csharp" triggers="150">
+			
+		</QAction>
+
+		<QAction id="202" name="ConnectToInterface" encoding="csharp" triggers="1202" row="true">
+			
+		</QAction>
+		<QAction id="210" name="DCF_Example_SaveUniqueSource" encoding="csharp" triggers="210">
+			
+		</QAction>
+		<QAction id="510" name="DCF_Example_SaveDVE" encoding="csharp" triggers="510">
+			
+		</QAction>
+
+
+		<QAction id="1000" name="ContextMenu" encoding="csharp" triggers="1100;1200;1500">
+			
+		</QAction>
+		<QAction id="1115" name="DCF_Example_InterfaceProperties" encoding="csharp" triggers="1115;1116" row="true">
+			
+		</QAction>
+		<QAction id="2004" name="MatrixFind" encoding="csharp" triggers="2004">
+			
+		</QAction>
+	</QActions>
+
+	<Commands>
+	</Commands>
+
+	<Responses>
+	</Responses>
+
+	<Pairs>
+	</Pairs>
+
+	<Groups>
+		<Group id="1">
+			<Name>AfterStartup</Name>
+			<Type>poll action</Type>
+			<Content>
+				<Action>2</Action>
+			</Content>
+		</Group>
+	</Groups>
+
+	<Triggers>
+		<Trigger id="1">
+			<Name>After Startup</Name>
+			<On>protocol</On>
+			<Time>after startup</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>1</Id>
+			</Content>
+		</Trigger>
+	</Triggers>
+
+	<Actions>
+		<Action id="1">
+			<Name>AfterStartup</Name>
+			<On id="1">group</On>
+			<Type>execute</Type>
+		</Action>
+		<Action id="2">
+			<Name>QA_AfterStartup</Name>
+			<On id="2">parameter</On>
+			<Type>run actions</Type>
+		</Action>
+	</Actions>
+
+	<Timers>
+	</Timers>
+
+	<PortSettings>
+	</PortSettings>
+
+</Protocol>
+
