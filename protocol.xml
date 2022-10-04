@@ -94,10 +94,10 @@ Any inquiries can be addressed to:
 		<Param id="1" trending="false">
 			<Name>Help</Name>
 			<Description>Driver Help</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Comments on how to use this driver.</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -118,18 +118,18 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="2">
-			<Name>QA_AfterStartup</Name>
-			<Description>QA_AfterStartup</Description>
+			<Name>AfterStartup</Name>
+			<Description>After Startup</Description>
 			<Type>dummy</Type>
 		</Param>
 		
 		<Param id="50" trending="false">
 			<Name>Mode</Name>
 			<Description>Mode</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Indicates if the card is working as a dual channel distribution amplifier. (using only one source, or using multiple sources) (A to A and B  or B to A and B)</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -162,10 +162,10 @@ Any inquiries can be addressed to:
 		<Param id="51" trending="false">
 			<Name>inputSelection</Name>
 			<Description>Input Selection</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Indicates the way the inputs are used. A to A and B to B  or  A to B and B to A</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -297,10 +297,10 @@ Any inquiries can be addressed to:
 		<Param id="53" trending="false" save="true">
 			<Name>connectionFilter</Name>
 			<Description>Connection Filter</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>This is a Value saved with a connection that can be used by the DataMiner Client to perform Path Highlighting in Visio's that have the same filter.</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -445,10 +445,10 @@ Any inquiries can be addressed to:
 		<Param id="111" trending="false">
 			<Name>driverInterfacesKey</Name>
 			<Description>Key (Driver Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Interface Key</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -464,10 +464,10 @@ Any inquiries can be addressed to:
 		<Param id="112" trending="false">
 			<Name>driverInterfacesDescription</Name>
 			<Description>Description [IDX] (Driver Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Interface Description</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -483,10 +483,10 @@ Any inquiries can be addressed to:
 		<Param id="113" trending="false">
 			<Name>driverInterfacesType</Name>
 			<Description>Type (Driver Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Interface Type</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -516,10 +516,10 @@ Any inquiries can be addressed to:
 		<Param id="114" trending="false">
 			<Name>driverInterfacesInterfaceState</Name>
 			<Description>Interface State (Driver Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Interface State</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -576,10 +576,10 @@ Any inquiries can be addressed to:
 		<Param id="115" trending="false">
 			<Name>driverInterfacesInterfacePropertyA</Name>
 			<Description>Interface Property A (Driver Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -595,10 +595,10 @@ Any inquiries can be addressed to:
 		<Param id="116" trending="false">
 			<Name>driverInterfacesInterfacePropertyB</Name>
 			<Description>Interface Property B (Driver Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -713,10 +713,10 @@ Any inquiries can be addressed to:
 		<Param id="151" trending="false">
 			<Name>getInterfacesResult</Name>
 			<Description>Get Interfaces Result</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>This displays the result from trying to retrieve the interfaces from DCF data</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -741,10 +741,10 @@ Any inquiries can be addressed to:
 		<Param id="152" trending="false">
 			<Name>PropertyNameGetInterfaces</Name>
 			<Description>Property Name (Get Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Property Name</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -767,10 +767,10 @@ Any inquiries can be addressed to:
 		<Param id="153" trending="false">
 			<Name>PropertyValueGetInterfaces</Name>
 			<Description>Property Value (Get Interfaces)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Property Value</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -837,7 +837,6 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		
-		
 		<Param id="200" trending="false">
 			<Name>uniqueSourceConnections</Name>
 			<Description>Unique Source Connections</Description>
@@ -871,10 +870,10 @@ Any inquiries can be addressed to:
 		<Param id="201" trending="false">
 			<Name>uniqueSourceConnectionsSourceInterface</Name>
 			<Description>Source Interface [IDX] (Unique Source Connections)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>US Source Interface</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -890,10 +889,10 @@ Any inquiries can be addressed to:
 		<Param id="202" trending="false">
 			<Name>uniqueSourceConnectionsDestinationInterface</Name>
 			<Description>Destination Interface (Unique Source Connections)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Destination interface</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -925,7 +924,6 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="210">
 			<Name>BUT_SaveUniqueSource</Name>
-			<Description></Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -986,10 +984,10 @@ Any inquiries can be addressed to:
 		<Param id="501" trending="false">
 			<Name>dveTableVirtualElementKey</Name>
 			<Description>Virtual Element Key (DVE Table)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Virtual Element Key</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -1005,10 +1003,10 @@ Any inquiries can be addressed to:
 		<Param id="502" trending="false">
 			<Name>dveTableVirtualElementName</Name>
 			<Description>Virtual Element Name [IDX] (DVE Table)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Virtual Element Name</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -1040,10 +1038,10 @@ Any inquiries can be addressed to:
 		<Param id="503" trending="false" export="true">
 			<Name>dveTableVirtualElementDestination</Name>
 			<Description>Virtual Element Destination (DVE Table)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Virtual Element Destination</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -1109,10 +1107,10 @@ Any inquiries can be addressed to:
 		<Param id="504" trending="false">
 			<Name>dveTableVirtualElementColumn</Name>
 			<Description>Virtual Element (DVE Table)</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>Virtual element</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -1162,10 +1160,10 @@ Any inquiries can be addressed to:
 		<Param id="998" trending="false" save="true">
 			<Name>AllInputs</Name>
 			<Description>All Inputs</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>All inputs</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -1181,10 +1179,10 @@ Any inquiries can be addressed to:
 		<Param id="999" trending="false" save="true">
 			<Name>AllOutputs</Name>
 			<Description>All Outputs</Description>
+			<Type>read</Type>
 			<Information>
 				<Subtext>All outputs</Subtext>
 			</Information>
-			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -1297,7 +1295,6 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		
-		
 		<Param id="2000">
 			<Name>Matrix</Name>
 			<Description>Matrix</Description>
@@ -1306,22 +1303,20 @@ Any inquiries can be addressed to:
 				help on options:
 					the different options are separated with a ';'
 					- dimensions:	row,column
-					- columntype:	2:0-20,35|3:21-34,36
+					- columnType:	2:0-20,35|3:21-34,36
 						where the number before the : specifies the parameter id and the numbers behind the columns (0 based)
 			-->
+			<Information>
+				<Subtext>Matrix</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
-			<Information>
-				<Subtext>Matrix</Subtext>
-			</Information>
-			<!-- SuppressValidator 2.5.1 No default provided -->
 			<Alarm>
 				<Monitored>true</Monitored>
 			</Alarm>
-			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -2537,8 +2532,9 @@ Any inquiries can be addressed to:
 	</QActions>
 
 	<Groups>
-		<Group id="1">
-			<Name>AfterStartup</Name>
+		<Group id="2">
+			<Name>After Startup</Name>
+			<Description>After Startup</Description>
 			<Type>poll action</Type>
 			<Content>
 				<Action>2</Action>
@@ -2560,12 +2556,12 @@ Any inquiries can be addressed to:
 
 	<Actions>
 		<Action id="1">
-			<Name>AfterStartup</Name>
-			<On id="1">group</On>
-			<Type>execute</Type>
+			<Name>After Startup Group</Name>
+			<On id="2">group</On>
+			<Type>execute next</Type>
 		</Action>
 		<Action id="2">
-			<Name>QA_AfterStartup</Name>
+			<Name>After Startup QAction</Name>
 			<On id="2">parameter</On>
 			<Type>run actions</Type>
 		</Action>

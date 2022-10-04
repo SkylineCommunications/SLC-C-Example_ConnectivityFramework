@@ -474,7 +474,7 @@ public interface SLProtocolExt : SLProtocol
 	MatrixQActionTable matrix { get; set; }
 	object Help_1 { get; set; }
 	object Help { get; set; }
-	object Qa_afterstartup_dummy { get; set; }
+	object Afterstartup_dummy { get; set; }
 	object Mode_50 { get; set; }
 	object Mode { get; set; }
 	object Inputselection_51 { get; set; }
@@ -589,7 +589,7 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 1  | Type: read</summary>
 	public System.Object Help {get { return GetParameter(1); }set { SetParameter(1, value); }}
 	/// <summary>PID: 2  | Type: dummy</summary>
-	public System.Object Qa_afterstartup_dummy {get { return GetParameter(2); }set { SetParameter(2, value); }}
+	public System.Object Afterstartup_dummy {get { return GetParameter(2); }set { SetParameter(2, value); }}
 	/// <summary>PID: 50  | Type: read | DISCREETS: 1-Channel = 0, 2-Channel = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Mode_50 {get { return GetParameter(50); }set { SetParameter(50, value); }}
