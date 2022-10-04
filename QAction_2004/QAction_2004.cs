@@ -18,12 +18,14 @@ public class QAction
 	/// <param name="protocol">Link with SLProtocol process.</param>
 	public static void Run(SLProtocol protocol)
 	{
-		DCFMappingOptions opt = new DCFMappingOptions();
-		opt.HelperType = SyncOption.Custom;
+		DCFMappingOptions opt = new DCFMappingOptions
+		{
+			HelperType = SyncOption.Custom,
+		};
+
 		using (DCFHelper dcf = new DCFHelper(protocol, false, opt))
 		{
 			DCFDynamicLinkResult[] result = dcf.GetInterfaces(new DCFDynamicLink(600, "*"));
-
 			foreach (var res in result)
 			{
 				foreach (var itf in res.AllInterfaces)

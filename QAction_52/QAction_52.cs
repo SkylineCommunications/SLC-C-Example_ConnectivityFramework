@@ -12,10 +12,12 @@ public class QAction
 	/// <param name="protocol">Link with SLProtocol connection.</param>
 	public static void Run(SLProtocol protocol)
 	{
-		DCFMappingOptions opt = new DCFMappingOptions();
-		opt.HelperType = SyncOption.Custom;
-		opt.PIDcurrentConnections = Parameter.map_connections_63998;
-		opt.PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997;
+		DCFMappingOptions opt = new DCFMappingOptions
+		{
+			HelperType = SyncOption.Custom,
+			PIDcurrentConnections = Parameter.map_connections_63998,
+			PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997,
+		};
 
 		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
 		{
@@ -27,10 +29,10 @@ public class QAction
 			if (sourceInterface != null)
 			{
 				var connections = sourceInterface.GetConnections(); // returns all connection where the given Interface is the SOURCE interface
-				foreach (var con in connections)
+				foreach (var connection in connections)
 				{
-					var properties = con.Value.ConnectionProperties;
-					dcf.RemoveConnectionProperties(con.Value, false, properties.Keys.ToArray());
+					var properties = connection.Value.ConnectionProperties;
+					dcf.RemoveConnectionProperties(connection.Value, false, properties.Keys.ToArray());
 				}
 
 				dcf.RemoveConnections(sourceInterface, true, false, connections.Keys.ToArray());

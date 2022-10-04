@@ -23,7 +23,7 @@ public class QAction
 			{
 				PIDcurrentConnections = Parameter.map_connections_63998,
 				PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997,
-				HelperType = SyncOption.EndOfPolling
+				HelperType = SyncOption.EndOfPolling,
 			};
 
 			// This uses DVEs so they need to be checked for startup, define what the Column is holding the ;element data (Multiple columns can be given and checked).
@@ -48,18 +48,18 @@ public class QAction
 							{
 								dcf.SaveConnectionProperties(
 									result[0].sourceConnection,
-									false,
+									full: false,
 									new ConnectivityConnectionProperty
 									{
 										ConnectionPropertyName = "Input Port Name",
 										ConnectionPropertyType = "input",
-										ConnectionPropertyValue = "Port 1/1"
+										ConnectionPropertyValue = "Port 1/1",
 									},
 									new ConnectivityConnectionProperty
 									{
 										ConnectionPropertyName = "Output Port Name",
 										ConnectionPropertyType = "output",
-										ConnectionPropertyValue = "Port 2/1"
+										ConnectionPropertyValue = "Port 2/1",
 									});
 							}
 
@@ -71,18 +71,18 @@ public class QAction
 							{
 								dcf.SaveConnectionProperties(
 									result[0].sourceConnection,
-									false,
+									full: false,
 									new ConnectivityConnectionProperty
 									{
 										ConnectionPropertyName = "Input Port Name",
 										ConnectionPropertyType = "input",
-										ConnectionPropertyValue = "Port 1/1"
+										ConnectionPropertyValue = "Port 1/1",
 									},
 									new ConnectivityConnectionProperty
 									{
 										ConnectionPropertyName = "Output Port Name",
 										ConnectionPropertyType = "output",
-										ConnectionPropertyValue = "Port 2/2"
+										ConnectionPropertyValue = "Port 2/2",
 									});
 							}
 

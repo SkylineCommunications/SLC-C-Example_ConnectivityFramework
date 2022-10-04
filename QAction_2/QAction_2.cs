@@ -46,7 +46,7 @@ DCF Example - DVE
 			DCFSaveConnectionRequest[] allConnections_A = new DCFSaveConnectionRequest[]
 			{
 				new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(9), new DCFDynamicLink(4),SaveConnectionType.Unique_Name,"Fixed A1",true),
-				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(9),new DCFDynamicLink(5),SaveConnectionType.Unique_Name,"Fixed A2",true)
+				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(9),new DCFDynamicLink(5),SaveConnectionType.Unique_Name,"Fixed A2",true),
 			};
 
 			// By setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling.
@@ -56,7 +56,7 @@ DCF Example - DVE
 			DCFSaveConnectionRequest[] allConnections_B = new DCFSaveConnectionRequest[]
 			{
 				new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(10), new DCFDynamicLink(6),SaveConnectionType.Unique_Name,"Fixed B1",true),
-				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(10),new DCFDynamicLink(7),SaveConnectionType.Unique_Name,"Fixed B2",true)
+				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(10),new DCFDynamicLink(7),SaveConnectionType.Unique_Name,"Fixed B2",true),
 			};
 
 			// By setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling
@@ -67,7 +67,11 @@ DCF Example - DVE
 			{
 				if (res.sourceConnection != null)
 				{
-					dcf.SaveConnectionProperties(res.sourceConnection, false, true, new ConnectivityConnectionProperty() {ConnectionPropertyName = "Passive Component",ConnectionPropertyType ="generic", ConnectionPropertyValue = "Fixed" });
+					dcf.SaveConnectionProperties(
+						res.sourceConnection,
+						full: false,
+						fixedProperty: true,
+						new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" });
 				}
 			}
 
@@ -75,7 +79,11 @@ DCF Example - DVE
 			{
 				if (res.sourceConnection != null)
 				{
-					dcf.SaveConnectionProperties(res.sourceConnection, false, true, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" });
+					dcf.SaveConnectionProperties(
+						res.sourceConnection,
+						full: false,
+						fixedProperty: true,
+						new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" });
 				}
 			}
 		}

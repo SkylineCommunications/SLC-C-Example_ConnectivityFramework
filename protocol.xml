@@ -2525,7 +2525,6 @@ Any inquiries can be addressed to:
 		<QAction id="210" name="DCF_Example_SaveUniqueSource" encoding="csharp" triggers="210" />
 		<QAction id="510" name="DCF_Example_SaveDVE" encoding="csharp" triggers="510" />
 
-
 		<QAction id="1000" name="ContextMenu" encoding="csharp" triggers="1100;1200;1500" />
 		<QAction id="1115" name="DCF_Example_InterfaceProperties" encoding="csharp" triggers="1115;1116" row="true" />
 		<QAction id="2004" name="MatrixFind" encoding="csharp" triggers="2004" />

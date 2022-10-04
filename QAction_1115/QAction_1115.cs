@@ -12,10 +12,12 @@ public class QAction
 	/// <param name="protocol">Link with SLProtocol process.</param>
 	public static void Run(SLProtocolExt protocol)
 	{
-		int trig = protocol.GetTriggerParameter();
-		DCFMappingOptions opt = new DCFMappingOptions();
-		opt.PIDcurrentInterfaceProperties = Parameter.map_interfaceproperties_63999;
-		opt.HelperType = SyncOption.Custom;
+		int triggerPid = protocol.GetTriggerParameter();
+		DCFMappingOptions opt = new DCFMappingOptions
+		{
+			PIDcurrentInterfaceProperties = Parameter.map_interfaceproperties_63999,
+			HelperType = SyncOption.Custom,
+		};
 
 		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
 		{
@@ -30,7 +32,7 @@ public class QAction
 					propertyType = "Input";
 					break;
 				case 101:
-					propertyType = "Ouptut";
+					propertyType = "Output";
 					break;
 				case 102:
 					propertyType = "Generic";
@@ -43,7 +45,7 @@ public class QAction
 			var foundInterface = dcf.GetInterfaces(new DCFDynamicLink(parameterGroupID, rowKey))[0].FirstInterface;
 			string propertyName;
 			string propertyValue;
-			if (trig == 1115)
+			if (triggerPid == 1115)
 			{
 				propertyName = "A";
 			}
@@ -52,8 +54,11 @@ public class QAction
 				propertyName = "B";
 			}
 
-			propertyValue = Convert.ToString(protocol.GetParameter(trig));
-			dcf.SaveInterfaceProperties(foundInterface, false, new ConnectivityInterfaceProperty { InterfacePropertyName = propertyName, InterfacePropertyType = propertyType, InterfacePropertyValue = propertyValue });
+			propertyValue = Convert.ToString(protocol.GetParameter(triggerPid));
+			dcf.SaveInterfaceProperties(
+				foundInterface,
+				full: false,
+				new ConnectivityInterfaceProperty { InterfacePropertyName = propertyName, InterfacePropertyType = propertyType, InterfacePropertyValue = propertyValue });
 		}
 	}
 }

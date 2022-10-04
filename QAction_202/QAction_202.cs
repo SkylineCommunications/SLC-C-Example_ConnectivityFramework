@@ -14,7 +14,9 @@ public class QAction
 		string value = Convert.ToString(protocol.GetParameter(protocol.GetTriggerParameter()));
 
 		if (key == value)
+		{
 			return;
+		}
 
 		protocol.uniquesourceconnections[key, Parameter.Uniquesourceconnections.Idx.uniquesourceconnectionsdestinationinterface_202] = value;
 	}
