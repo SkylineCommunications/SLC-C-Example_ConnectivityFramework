@@ -36,19 +36,23 @@ public class QAction
 					{
 						// Connect A to both Virtual out A and out B.
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(1), new DCFDynamicLink(9), SaveConnectionType.Unique_Destination, "A -> Virtual A", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(1), new DCFDynamicLink(10), SaveConnectionType.Unique_Destination, "A -> Virtual B", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 					}
 					else
 					{
-						//Connect B to both Virtual out A and out B.
+						// Connect B to both Virtual out A and out B.
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(2), new DCFDynamicLink(9), SaveConnectionType.Unique_Destination, "B -> Virtual A", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(2), new DCFDynamicLink(10), SaveConnectionType.Unique_Destination, "B -> Virtual B", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 					}
 				}
 				else
@@ -58,20 +62,24 @@ public class QAction
 						// Connect A to  Virtual out A
 						// Connect B to Virtual out B
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(1), new DCFDynamicLink(9), SaveConnectionType.Unique_Destination, "A -> Virtual A", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(2), new DCFDynamicLink(10), SaveConnectionType.Unique_Destination, "B -> Virtual B", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 					}
 					else
 					{
 						// Connect A to  Virtual out B
 						// Connect B to Virtual out A
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(1), new DCFDynamicLink(10), SaveConnectionType.Unique_Destination, "A -> Virtual B", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 
 						result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(2), new DCFDynamicLink(9), SaveConnectionType.Unique_Destination, "B -> Virtual A", connectionFilter));
-						if (result[0].sourceConnection != null) dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
+						if (result[0].sourceConnection != null)
+							dcf.SaveConnectionProperties(result[0].sourceConnection, false, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dynamic:" + mode + "/" + inputSel });
 					}
 				}
 			}
@@ -79,7 +87,7 @@ public class QAction
 		#region catch
 		catch (Exception e)
 		{
-			protocol.Log(string.Format("QA{0}: (Exception) Value at {1} with Exception:{2}", protocol.QActionID, "Run Method", e.ToString()), LogType.Error, LogLevel.NoLogging);
+			protocol.Log(string.Format("QA{0}: (Exception) Value at {1} with Exception:{2}", protocol.QActionID, "Run Method", e), LogType.Error, LogLevel.NoLogging);
 		}
 		#endregion
 	}

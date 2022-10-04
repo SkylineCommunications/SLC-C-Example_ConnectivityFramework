@@ -64,6 +64,9 @@ public class QAction
 			case "clear":
 				protocol.ClearAllKeys(tableID);
 				break;
+			default:
+				// Do nothing.
+				break;
 		}
 	}
 
@@ -104,7 +107,7 @@ public class QAction
 
 		if (!protocol.Exists(tableID, tableKey))
 		{
-			protocol.AddRow(tableID, new DriverinterfacesQActionRow() { Driverinterfaceskey_111 = tableKey, Driverinterfacesdescription_112 = tableKeyO,Driverinterfacestype_113 = 100 });
+			protocol.AddRow(tableID, new DriverinterfacesQActionRow { Driverinterfaceskey_111 = tableKey, Driverinterfacesdescription_112 = tableKeyO,Driverinterfacestype_113 = 100 });
 			string stringValue = Convert.ToString(protocol.GetParameter(Parameter.allinputs_998));
 			stringValue += (String.IsNullOrEmpty(stringValue) ? String.Empty : ";") + tableKey;
 			protocol.SetParameter(Parameter.allinputs_998, stringValue);
@@ -119,7 +122,7 @@ public class QAction
 
 		if (!protocol.Exists(tableID, tableKey))
 		{
-			protocol.AddRow(tableID, new DriverinterfacesQActionRow() { Driverinterfaceskey_111 = tableKey, Driverinterfacesdescription_112 = tableKeyO, Driverinterfacestype_113 = 101 });
+			protocol.AddRow(tableID, new DriverinterfacesQActionRow { Driverinterfaceskey_111 = tableKey, Driverinterfacesdescription_112 = tableKeyO, Driverinterfacestype_113 = 101 });
 			string stringValue = Convert.ToString(protocol.GetParameter(Parameter.alloutputs_999));
 			stringValue += (String.IsNullOrEmpty(stringValue) ? String.Empty : ";") + tableKey;
 			protocol.SetParameter(Parameter.alloutputs_999, stringValue);
@@ -133,7 +136,7 @@ public class QAction
 		string tableKey = Convert.ToString(GetFirstAvailableIntegerIndex(protocol, 100));
 		if (!protocol.Exists(tableID, tableKey))
 		{
-			protocol.AddRow(tableID, new DriverinterfacesQActionRow() { Driverinterfaceskey_111 = tableKey, Driverinterfacesdescription_112 = tableKeyO, Driverinterfacestype_113=102 });
+			protocol.AddRow(tableID, new DriverinterfacesQActionRow { Driverinterfaceskey_111 = tableKey, Driverinterfacesdescription_112 = tableKeyO, Driverinterfacestype_113=102 });
 
 			for (int i = 998; i <= 999; i++)
 			{
@@ -144,7 +147,7 @@ public class QAction
 		}
 	}
 
-	public static int GetFirstAvailableIntegerIndex(SLProtocol protocol, int tableId)
+	private static int GetFirstAvailableIntegerIndex(SLProtocol protocol, int tableId)
 	{
 		object[] columns = (object[])protocol.NotifyProtocol(321 /*NT_GT_TABLE_COLUMNS*/, tableId, new UInt32[] { 0 });
 		object[] instance = (object[])columns[0];
@@ -164,7 +167,7 @@ public class QAction
 		return newId;
 	}
 
-	public static int[] GetFirstAvailableIntegerIndex(SLProtocol protocol, int tableId, int allKeys)
+	private static int[] GetFirstAvailableIntegerIndex(SLProtocol protocol, int tableId, int allKeys)
 	{
 		object[] columns = (object[])protocol.NotifyProtocol(321 /*NT_GT_TABLE_COLUMNS*/, tableId, new UInt32[] { 0 });
 		object[] instance = (object[])columns[0];

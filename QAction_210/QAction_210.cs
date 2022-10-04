@@ -16,7 +16,7 @@ public class QAction
 	{
 		try
 		{
-			// Grabbing Data from driver
+			// Grabbing data from driver.
 			object[] columns = (object[])protocol.NotifyProtocol(321 /*NT_GT_TABLE_COLUMNS*/, Parameter.Uniquesourceconnections.tablePid/*200*/, new uint[] { 0, 1 });
 			object[] sourceInterfacesO = (object[])columns[0];
 			object[] destinationInterfacesO = (object[])columns[1];
@@ -25,7 +25,7 @@ public class QAction
 			object[] interfaceKeys = (object[])columnsInterfaces[0];
 			object[] interfacesTypes = (object[])columnsInterfaces[1];
 
-			//Dictionary for Quick Index Lookup
+			// Dictionary for quick index lookup.
 			Dictionary<string, int> mapInterfaceType = (interfaceKeys != null) ? Enumerable.Range(0, interfaceKeys.Length).ToDictionary(
 				i => Convert.ToString(interfaceKeys[i]),
 				u => Convert.ToInt32(interfacesTypes[u])) : new Dictionary<string, int>();
@@ -47,15 +47,14 @@ public class QAction
 
 					if (mapInterfaceType.TryGetValue(sourceKey, out src_parameterGroupID))
 					{
-						//SourceType tells us the ParameterGroupID for this Example Driver
-						//Get the Source Interface from DCF
-
+						// SourceType tells us the ParameterGroupID for this Example Driver.
+						// Get the Source Interface from DCF.
 						ConnectivityInterface source = dcf.GetInterfaces(new DCFDynamicLink(src_parameterGroupID, sourceKey))[0].FirstInterface;
+
 						if (source == null)
 						{
 							protocol.Log("QA" + protocol.QActionID + "|SaveUniqueSource could not find Source:" + src_parameterGroupID + "/" + sourceKey, LogType.Error, LogLevel.NoLogging);
-							continue;
-							//Could not find the interface
+							continue; // Could not find the interface.
 						}
 
 						int dst_parameterGroupID;
@@ -66,7 +65,7 @@ public class QAction
 							if (destination == null)
 							{
 								protocol.Log("QA" + protocol.QActionID + "|SaveUniqueSource could not find destination:" + dst_parameterGroupID + "/" + destinationKey, LogType.Error, LogLevel.NoLogging);
-								continue;//Could not find the interface
+								continue; // Could not find the interface.
 							}
 
 							allConnectionRequests.Add(new DCFSaveConnectionRequest(source, destination, SaveConnectionType.Unique_Source));
@@ -82,8 +81,9 @@ public class QAction
 
 				DCFSaveConnectionResult[] results = dcf.SaveConnections(allConnectionRequests.ToArray());
 
-				// Making some Dummy Properties.
+				// Making some dummy properties.
 				Random r = new Random();
+
 				for (int i = 0; i < results.Length; i++)
 				{
 					DCFSaveConnectionResult result = results[i];
@@ -92,7 +92,7 @@ public class QAction
 						ConnectivityConnection sourceConnection = result.sourceConnection;
 						if (sourceConnection != null)
 						{
-							dcf.SaveConnectionProperties(sourceConnection, false, false, false, true, new ConnectivityConnectionProperty() { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dummy Value " + r.Next(4) });
+							dcf.SaveConnectionProperties(sourceConnection, false, false, false, true, new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dummy Value " + r.Next(4) });
 						}
 					}
 				}
@@ -101,7 +101,7 @@ public class QAction
 		#region catch
 		catch (Exception e)
 		{
-			protocol.Log(string.Format("QA{0}: (Exception) Value at {1} with Exception:{2}", protocol.QActionID, "Run Method", e.ToString()), LogType.Error, LogLevel.NoLogging);
+			protocol.Log(string.Format("QA{0}: (Exception) Value at {1} with Exception:{2}", protocol.QActionID, "Run Method", e), LogType.Error, LogLevel.NoLogging);
 		}
 		#endregion
 	}

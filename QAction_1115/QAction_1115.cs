@@ -35,6 +35,9 @@ public class QAction
 				case 102:
 					propertyType = "Generic";
 					break;
+				default:
+					// Do nothing.
+					break;
 			}
 
 			var foundInterface = dcf.GetInterfaces(new DCFDynamicLink(parameterGroupID, rowKey))[0].FirstInterface;

@@ -62,6 +62,7 @@ public class QAction
 										ConnectionPropertyValue = "Port 2/1"
 									});
 							}
+
 							break;
 						case 1:
 							// Connect to 2/2.
@@ -86,6 +87,9 @@ public class QAction
 							}
 
 							break;
+						default:
+							// Do nothing.
+							break;
 					}
 				}
 			}
@@ -93,7 +97,7 @@ public class QAction
 		#region catch
 		catch (Exception e)
 		{
-			protocol.Log(string.Format("QA{0}: (Exception) Value at {1} with Exception:{2}", protocol.QActionID, "Run Method", e.ToString()), LogType.Error, LogLevel.NoLogging);
+			protocol.Log(string.Format("QA{0}: (Exception) Value at {1} with Exception:{2}", protocol.QActionID, "Run Method", e), LogType.Error, LogLevel.NoLogging);
 		}
 		#endregion
 	}

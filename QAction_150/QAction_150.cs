@@ -27,8 +27,8 @@ public class QAction
 
 			var allInterfaces = dcf.GetInterfaces(new DCFDynamicLink(new PropertyFilter(name, value)))[0].AllInterfaces;
 
-			foreach(var interf in allInterfaces){
-
+			foreach(var interf in allInterfaces)
+			{
 				sb.AppendLine("Interface found: " + interf.InterfaceId + " with name: " + interf.InterfaceName);
 			}
 		}
