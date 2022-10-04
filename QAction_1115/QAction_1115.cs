@@ -53,7 +53,7 @@ public class QAction
 			}
 
 			propertyValue = Convert.ToString(protocol.GetParameter(trig));
-			dcf.SaveInterfaceProperties(foundInterface, false, new ConnectivityInterfaceProperty() { InterfacePropertyName = propertyName, InterfacePropertyType = propertyType, InterfacePropertyValue = propertyValue });
+			dcf.SaveInterfaceProperties(foundInterface, false, new ConnectivityInterfaceProperty { InterfacePropertyName = propertyName, InterfacePropertyType = propertyType, InterfacePropertyValue = propertyValue });
 		}
 	}
 }

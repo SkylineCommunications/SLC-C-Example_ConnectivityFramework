@@ -18,8 +18,8 @@ public class QAction
 		// sa[0] = unique client id
 		// sa[1] = command (= value of discreet defined on this parameter)
 		// sa[n] = optional arguments depending on command
-
 		var sa = extraData as string[];
+
 		if (sa == null || sa.Length < 2)
 			return;
 
@@ -165,25 +165,5 @@ public class QAction
 		}
 
 		return newId;
-	}
-
-	private static int[] GetFirstAvailableIntegerIndex(SLProtocol protocol, int tableId, int allKeys)
-	{
-		object[] columns = (object[])protocol.NotifyProtocol(321 /*NT_GT_TABLE_COLUMNS*/, tableId, new UInt32[] { 0 });
-		object[] instance = (object[])columns[0];
-
-		if (instance.Length != 0)
-		{
-			int[] primaryKeys = Array.ConvertAll<object, int>(instance, new Converter<object, Int32>(Convert.ToInt32));
-			var firstAvailable = Enumerable.Range(1, int.MaxValue)
-								.Except(primaryKeys)
-								.Take(allKeys);
-
-			return firstAvailable.ToArray();
-		}
-		else
-		{
-			return Enumerable.Range(1, allKeys).ToArray();
-		}
 	}
 }
