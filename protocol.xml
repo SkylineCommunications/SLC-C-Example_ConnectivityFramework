@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
+﻿<!--
+
 ****************************************************************************
 *  Copyright (c) 2022,  Skyline Communications NV  All Rights Reserved.    *
 ****************************************************************************
@@ -40,31 +40,38 @@ Any inquiries can be addressed to:
 	E-mail	: info@skyline.be
 	Web		: www.skyline.be
 	Contact	: Ben Vandenberghe
+	
 -->
+
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>SLC SDF DCF</Name>
 	<Description>DataMiner Connectivity Framework</Description>
 	<Version>1.0.0.1</Version>
+	<IntegrationID>DMS-DRV-12345</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Skyline</Vendor>
-	<VendorOID>1.3.6.1.4.1.8813.2.XX</VendorOID>
-	<DeviceOID>XX</DeviceOID>
+	<VendorOID>1.3.6.1.4.1.8813.2.0</VendorOID>
+	<DeviceOID>0</DeviceOID>
 	<ElementType>Virtual</ElementType>
 	<Type relativeTimers="true" options="exportProtocol:SLC SDF DCF - DVE:500">virtual</Type>
-	<!-- SuppressValidator 1.21.5 SDF driver -->
-	<Display defaultPage="Help" pageOrder="Help;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;Matrix;Matrix2" wideColumnPages="Help" />
-	<!-- /SuppressValidator 1.21.5 -->
+	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;Matrix;Matrix2" wideColumnPages="General" />
 	<SNMP includepages="true">auto</SNMP>
+
+	<Compliancies>
+		<CassandraReady>true</CassandraReady>
+	</Compliancies>
 
 	<ParameterGroups>
 		<Group id="1" name="Fixed Input Port A" type="in" />
 		<Group id="2" name="Fixed Input Port B" type="in" />
-		<Group id="4" name="Fixed Output Port A1" type="out" />
-		<Group id="5" name="Fixed Output Port A2" type="out" />
-		<Group id="6" name="Fixed Output Port B1" type="out" />
-		<Group id="7" name="Fixed Output Port B2" type="out" />
-		<Group id="9" name="Virtual Output Port A" type="inout" />
-		<Group id="10" name="Virtual Output Port B" type="inout" />
+
+		<Group id="21" name="Fixed Output Port A1" type="out" />
+		<Group id="22" name="Fixed Output Port A2" type="out" />
+		<Group id="23" name="Fixed Output Port B1" type="out" />
+		<Group id="24" name="Fixed Output Port B2" type="out" />
+
+		<Group id="41" name="Virtual InOut Port A" type="inout" />
+		<Group id="42" name="Virtual InOut Port B" type="inout" />
 
 		<Group id="100" name="Dynamic Table IN" type="in" dynamicId="100" dynamicIndex="I_*" />
 		<Group id="101" name="Dynamic Table OUT" type="out" dynamicId="100" dynamicIndex="O_*" />
@@ -72,7 +79,7 @@ Any inquiries can be addressed to:
 
 		<Group id="500" name="Port 1/1" type="in" dynamicId="500" dynamicIndex="*" />
 		<Group id="501" name="Port 2/1" type="out" dynamicId="500" dynamicIndex="*" />
-		<Group id="502" name="Port 2/2" type="out" dynamicId="500" dynamicIndex="*" />
+		<Group id="502" name="Port 2/2" type="inout" dynamicId="500" dynamicIndex="*" />
 
 		<Group id="600" name="Matrix" type="inout" dynamicId="2000" dynamicIndex="*" dynamicUsePK="true" />
 		<!--Warning, all id's must stay below 10 000-->
@@ -82,28 +89,27 @@ Any inquiries can be addressed to:
 		<ExportRule table="500" tag="Protocol/Display" attribute="pageOrder" value="General" />
 		<ExportRule table="500" tag="Protocol/Display" attribute="wideColumnPages" value="" />
 	</ExportRules>
-	<Params>
 
+	<Params>
 		<Param id="1" trending="false">
 			<Name>Help</Name>
 			<Description>Driver Help</Description>
 			<Information>
-				<Text>Driver Help</Text>
 				<Subtext>Comments on how to use this driver.</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
 					<Position>
-						<Page>Help</Page>
-						<Row>0</Row>
+						<Page>General</Page>
 						<Column>0</Column>
+						<Row>0</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -115,16 +121,8 @@ Any inquiries can be addressed to:
 			<Name>QA_AfterStartup</Name>
 			<Description>QA_AfterStartup</Description>
 			<Type>dummy</Type>
-			<Interprete>
-				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
-				<Type>string</Type>
-			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
-
+		
 		<Param id="50" trending="false">
 			<Name>Mode</Name>
 			<Description>Mode</Description>
@@ -134,8 +132,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -170,8 +168,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -203,8 +201,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -236,8 +234,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -263,19 +261,18 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="52">
 			<Name>BUT_RemoveVirtualAConnections</Name>
-			<Description></Description>
 			<Type>write</Type>
-			<Interprete>
-				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
-				<Type>double</Type>
-			</Interprete>
 			<Information>
 				<Subtext>Remove virtual A connections</Subtext>
 			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -306,8 +303,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 				<DefaultValue>FilterValue1;FilterValue2;FilterValue3</DefaultValue>
 			</Interprete>
 			<Display>
@@ -330,8 +327,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -347,7 +344,7 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<!--ContextMenuValues-->
 		<Param id="96" trending="false">
 			<Name>context_KeyOutput</Name>
@@ -355,8 +352,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -372,8 +369,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -389,8 +386,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -405,8 +402,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -415,7 +412,7 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		<!--Dynamic Table Interfaces-->
+		
 		<Param id="100" trending="false">
 			<Name>driverInterfaces</Name>
 			<Description>Driver Interfaces</Description>
@@ -429,14 +426,8 @@ Any inquiries can be addressed to:
 				<ColumnOption idx="5" pid="116" type="retrieved" options=";save" />
 			</ArrayOptions>
 			<Information>
-				<Text>Interfaces</Text>
 				<Subtext>Interfaces</Subtext>
 			</Information>
-			<Interprete>
-				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
-				<Type>double</Type>
-			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -455,14 +446,13 @@ Any inquiries can be addressed to:
 			<Name>driverInterfacesKey</Name>
 			<Description>Key (Driver Interfaces)</Description>
 			<Information>
-				<Text>Interface Key</Text>
 				<Subtext>Interface Key</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -475,14 +465,13 @@ Any inquiries can be addressed to:
 			<Name>driverInterfacesDescription</Name>
 			<Description>Description [IDX] (Driver Interfaces)</Description>
 			<Information>
-				<Text>Interface Description</Text>
 				<Subtext>Interface Description</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -495,14 +484,13 @@ Any inquiries can be addressed to:
 			<Name>driverInterfacesType</Name>
 			<Description>Type (Driver Interfaces)</Description>
 			<Information>
-				<Text>Interface Type</Text>
 				<Subtext>Interface Type</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -529,14 +517,13 @@ Any inquiries can be addressed to:
 			<Name>driverInterfacesInterfaceState</Name>
 			<Description>Interface State (Driver Interfaces)</Description>
 			<Information>
-				<Text>Interface State</Text>
 				<Subtext>Interface State</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
@@ -566,8 +553,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -595,8 +582,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -614,8 +601,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -630,8 +617,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -646,8 +633,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -656,15 +643,15 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="149">
 			<Name>PB_GetInterfaces</Name>
 			<Description></Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -692,8 +679,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Information>
 				<Subtext>Get interfaces from DCF</Subtext>
@@ -722,7 +709,7 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="151" trending="false">
 			<Name>getInterfacesResult</Name>
 			<Description>Get Interfaces Result</Description>
@@ -732,8 +719,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -749,8 +736,8 @@ Any inquiries can be addressed to:
 				<Type lines="10">string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="152" trending="false">
 			<Name>PropertyNameGetInterfaces</Name>
 			<Description>Property Name (Get Interfaces)</Description>
@@ -760,8 +747,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -786,8 +773,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -809,8 +796,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -832,8 +819,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -849,8 +836,8 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="200" trending="false">
 			<Name>uniqueSourceConnections</Name>
 			<Description>Unique Source Connections</Description>
@@ -860,13 +847,12 @@ Any inquiries can be addressed to:
 				<ColumnOption idx="1" pid="202" type="retrieved" options=";save" />
 			</ArrayOptions>
 			<Information>
-				<Text>Interfaces</Text>
 				<Subtext>Interfaces</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -886,14 +872,13 @@ Any inquiries can be addressed to:
 			<Name>uniqueSourceConnectionsSourceInterface</Name>
 			<Description>Source Interface [IDX] (Unique Source Connections)</Description>
 			<Information>
-				<Text>US Source Interface</Text>
 				<Subtext>US Source Interface</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -911,8 +896,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -927,13 +912,11 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
-				<!-- SuppressValidator 2.7.5 Suppressed -->
 				<RTDisplay>true</RTDisplay>
-				<!-- /SuppressValidator 2.7.5 -->
 			</Display>
 			<Measurement>
 				<Type>discreet</Type>
@@ -946,8 +929,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Information>
 				<Subtext>Save unique source</Subtext>
@@ -972,7 +955,7 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="500" trending="false">
 			<Name>dveTable</Name>
 			<Description>DVE Table</Description>
@@ -984,14 +967,8 @@ Any inquiries can be addressed to:
 				<ColumnOption idx="3" pid="504" type="retrieved" options=";element" />
 			</ArrayOptions>
 			<Information>
-				<Text>Interfaces</Text>
 				<Subtext>Interfaces</Subtext>
 			</Information>
-			<Interprete>
-				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
-				<Type>double</Type>
-			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -1010,14 +987,13 @@ Any inquiries can be addressed to:
 			<Name>dveTableVirtualElementKey</Name>
 			<Description>Virtual Element Key (DVE Table)</Description>
 			<Information>
-				<Text>Virtual Element Key</Text>
 				<Subtext>Virtual Element Key</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1030,14 +1006,13 @@ Any inquiries can be addressed to:
 			<Name>dveTableVirtualElementName</Name>
 			<Description>Virtual Element Name [IDX] (DVE Table)</Description>
 			<Information>
-				<Text>Virtual Element Name</Text>
 				<Subtext>Virtual Element Name</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1052,13 +1027,11 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
-				<!-- SuppressValidator 2.7.5 Suppressed -->
 				<RTDisplay>true</RTDisplay>
-				<!-- /SuppressValidator 2.7.5 -->
 			</Display>
 			<Measurement>
 				<Type>string</Type>
@@ -1068,14 +1041,13 @@ Any inquiries can be addressed to:
 			<Name>dveTableVirtualElementDestination</Name>
 			<Description>Virtual Element Destination (DVE Table)</Description>
 			<Information>
-				<Text>Virtual Element Destination</Text>
 				<Subtext>Virtual Element Destination</Subtext>
 			</Information>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1107,8 +1079,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1143,8 +1115,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1153,15 +1125,15 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="510">
 			<Name>BUT_SaveDVEDCF</Name>
 			<Description></Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Information>
 				<Subtext>Save DVE DCF</Subtext>
@@ -1186,9 +1158,7 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-
-
-		<!--DiscreetValues-->
+		
 		<Param id="998" trending="false" save="true">
 			<Name>AllInputs</Name>
 			<Description>All Inputs</Description>
@@ -1198,8 +1168,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1217,8 +1187,8 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1227,16 +1197,15 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-		<!--ContextMenus-->
+		
 		<Param id="1100" trending="false">
 			<Name>driverInterfaces_ContextMenu</Name>
 			<Description>Driver Interfaces Context Menu</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1273,8 +1242,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1303,8 +1272,8 @@ Any inquiries can be addressed to:
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1327,23 +1296,23 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="2000">
 			<Name>Matrix</Name>
 			<Description>Matrix</Description>
 			<Type options="dimensions=128,128;columntypes=2002:0-127">array</Type>
 			<!--
-		help on options:
-			the different options are separated with a ';'
-			- dimensions:	row,column
-			- columntype:	2:0-20,35|3:21-34,36
-				where the number before the : specifies the parameter id and the numbers behind the columns (0 based)
-	-->
+				help on options:
+					the different options are separated with a ';'
+					- dimensions:	row,column
+					- columntype:	2:0-20,35|3:21-34,36
+						where the number before the : specifies the parameter id and the numbers behind the columns (0 based)
+			-->
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Information>
 				<Subtext>Matrix</Subtext>
@@ -2400,8 +2369,8 @@ Any inquiries can be addressed to:
 			<Type options="dimensions=128,128;columntypes=2002:0-127">write</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -2417,47 +2386,43 @@ Any inquiries can be addressed to:
 				<!-- Sequence for matrix options Number Inputs/Number Outputs/COMin/COMax/CIMin/CIMax -->
 				<Type>matrix</Type>
 			</Measurement>
-
 		</Param>
-
+		
 		<Param id="2002" trending="false">
 			<Name>column</Name>
 			<Description>column</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>unsigned number</RawType>
+				<Type>double</Type>
 				<LengthType>fixed</LengthType>
 				<Length>1</Length>
-				<Type>double</Type>
 			</Interprete>
 		</Param>
-
+		
 		<Param id="2003">
 			<Name>discreetInfo</Name>
 			<Description>Discrete Info</Description>
 			<Type>discreet info</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
-
+		
 		<Param id="2004">
 			<Name>BUT_FindInterface</Name>
 			<Description></Description>
 			<Type>write</Type>
-			<Interprete>
-				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
-				<Type>string</Type>
-			</Interprete>
 			<Information>
 				<Subtext>Find interface</Subtext>
 			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -2478,7 +2443,7 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<!--DCFHelper Mapping Parameters-->
 		<Param id="63993">
 			<Name>MAP_StartupElements</Name>
@@ -2486,12 +2451,9 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 		<Param id="63994">
 			<Name>MAP_NewConnectionProperties</Name>
@@ -2499,12 +2461,9 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 		<Param id="63995">
 			<Name>MAP_NewConnections</Name>
@@ -2512,12 +2471,9 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 		<Param id="63996">
 			<Name>MAP_NewInterfaceProperties</Name>
@@ -2525,12 +2481,9 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 		<Param id="63997" save="true">
 			<Name>MAP_ConnectionProperties</Name>
@@ -2538,12 +2491,9 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 		<Param id="63998" save="true">
 			<Name>MAP_Connections</Name>
@@ -2551,12 +2501,9 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 		<Param id="63999" save="true">
 			<Name>MAP_InterfaceProperties</Name>
@@ -2564,65 +2511,30 @@ Any inquiries can be addressed to:
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
-				<LengthType>next param</LengthType>
 				<Type>string</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
-			<Display>
-				<RTDisplay>false</RTDisplay>
-			</Display>
 		</Param>
 	</Params>
 
 	<QActions>
+		<QAction id="1" name="DCFHelper" encoding="csharp" options="precompile" />
 
-		<QAction id="1" name="DCFHelper" encoding="csharp" options="precompile">
+		<QAction id="2" name="AfterStartup" encoding="csharp" triggers="2" />
+		<QAction id="50" name="DCF_Example_ModeSelectionChange" encoding="csharp" triggers="50;51;1053" />
+		<QAction id="52" name="DCF_Example_RemoveFixedConnection" encoding="csharp" triggers="52" />
 
-		</QAction>
+		<QAction id="150" name="DCF_Example_GetInterfaces" encoding="csharp" triggers="150" />
 
-		<QAction id="2" name="AfterStartup" encoding="csharp" triggers="2">
-
-		</QAction>
-		<QAction id="50" name="DCF_Example_ModeSelectionChange" encoding="csharp" triggers="50;51;1053">
-
-		</QAction>
-		<QAction id="52" name="DCF_Example_RemoveFixedConnection" encoding="csharp" triggers="52">
-
-		</QAction>
-
-		<QAction id="150" name="DCF_Example_GetInterfaces" encoding="csharp" triggers="150">
-
-		</QAction>
-
-		<QAction id="202" name="ConnectToInterface" encoding="csharp" triggers="1202" row="true">
-
-		</QAction>
-		<QAction id="210" name="DCF_Example_SaveUniqueSource" encoding="csharp" triggers="210">
-
-		</QAction>
-		<QAction id="510" name="DCF_Example_SaveDVE" encoding="csharp" triggers="510">
-
-		</QAction>
+		<QAction id="202" name="ConnectToInterface" encoding="csharp" triggers="1202" row="true" />
+		<QAction id="210" name="DCF_Example_SaveUniqueSource" encoding="csharp" triggers="210" />
+		<QAction id="510" name="DCF_Example_SaveDVE" encoding="csharp" triggers="510" />
 
 
-		<QAction id="1000" name="ContextMenu" encoding="csharp" triggers="1100;1200;1500">
-
-		</QAction>
-		<QAction id="1115" name="DCF_Example_InterfaceProperties" encoding="csharp" triggers="1115;1116" row="true">
-
-		</QAction>
-		<QAction id="2004" name="MatrixFind" encoding="csharp" triggers="2004">
-
-		</QAction>
+		<QAction id="1000" name="ContextMenu" encoding="csharp" triggers="1100;1200;1500" />
+		<QAction id="1115" name="DCF_Example_InterfaceProperties" encoding="csharp" triggers="1115;1116" row="true" />
+		<QAction id="2004" name="MatrixFind" encoding="csharp" triggers="2004" />
 	</QActions>
-
-	<Commands>
-	</Commands>
-
-	<Responses>
-	</Responses>
-
-	<Pairs>
-	</Pairs>
 
 	<Groups>
 		<Group id="1">
@@ -2662,9 +2574,6 @@ Any inquiries can be addressed to:
 	<Timers>
 	</Timers>
 
-	<PortSettings>
-	</PortSettings>
-
 	<VersionHistory>
 		<Branches>
 			<Branch id="1">
@@ -2695,5 +2604,5 @@ Any inquiries can be addressed to:
 			</Branch>
 		</Branches>
 	</VersionHistory>
-</Protocol>
 
+</Protocol>
