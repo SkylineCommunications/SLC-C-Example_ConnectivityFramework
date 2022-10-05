@@ -40,9 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Skyline DataMiner\ProtocolScripts\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="Microsoft.CSharp" />
     <AdditionalFiles Include="stylecop.json" />
@@ -402,6 +399,9 @@
     <Compile Include="QAction_ClassLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Skyline.DataMiner.Dev.Automation">
       <Version>10.0.0.5</Version>
     </PackageReference>
@@ -412,7 +412,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties DisLinkId="" DisProjectType="classLibraryProject" DisLinkedXmlFile="" />
+      <UserProperties DisLinkedXmlFile="" DisProjectType="classLibraryProject" DisLinkId="" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

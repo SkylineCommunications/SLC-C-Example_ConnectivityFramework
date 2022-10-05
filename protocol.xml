@@ -907,7 +907,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="1202">
 			<Name>uniqueSourceConnectionsDestinationInterface</Name>
-			<Description>US Destination Interface</Description>
+			<Description>Destination Interface (Unique Source Connections)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
