@@ -33,11 +33,11 @@ public class QAction
 			DCFMappingOptions opt = new DCFMappingOptions
 			{
 				HelperType = SyncOption.EndOfPolling,
-				PIDcurrentConnections = Parameter.map_connections_63998,
-				PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997,
+				PIDcurrentConnections = Parameter.mapconnections_63998,
+				PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997,
 			};
 
-			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
+			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
 			{
 				List<DCFSaveConnectionRequest> allConnectionRequests = new List<DCFSaveConnectionRequest>();
 

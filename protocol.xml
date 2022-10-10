@@ -54,7 +54,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Virtual</ElementType>
 	<Type relativeTimers="true" options="exportProtocol:SLC SDF DCF - DVE:500">virtual</Type>
-	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;Matrix;Matrix2" wideColumnPages="General" />
+	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;Matrix" wideColumnPages="General" />
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -92,7 +92,7 @@ Any inquiries can be addressed to:
 
 	<Params>
 		<Param id="1" trending="false">
-			<Name>Help</Name>
+			<Name>help</Name>
 			<Description>Driver Help</Description>
 			<Type>read</Type>
 			<Information>
@@ -118,13 +118,13 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="2">
-			<Name>AfterStartup</Name>
+			<Name>afterStartup</Name>
 			<Description>After Startup</Description>
 			<Type>dummy</Type>
 		</Param>
 		
 		<Param id="50" trending="false">
-			<Name>Mode</Name>
+			<Name>mode</Name>
 			<Description>Mode</Description>
 			<Type>read</Type>
 			<Information>
@@ -196,7 +196,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="1050" setter="true">
-			<Name>Mode</Name>
+			<Name>mode</Name>
 			<Description>Mode</Description>
 			<Type>write</Type>
 			<Interprete>
@@ -263,7 +263,7 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<Param id="52">
-			<Name>BUT_RemoveVirtualAConnections</Name>
+			<Name>buttonRemoveVirtualAConnections</Name>
 			<Type>write</Type>
 			<Information>
 				<Subtext>Remove virtual A connections</Subtext>
@@ -346,23 +346,6 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<!--ContextMenuValues-->
-		<Param id="96" trending="false">
-			<Name>context_KeyOutput</Name>
-			<Description>Unique Output Interface Key</Description>
-			<Type>read</Type>
-			<Interprete>
-				<RawType>other</RawType>
-				<Type>string</Type>
-				<LengthType>next param</LengthType>
-			</Interprete>
-			<Display>
-				<RTDisplay>true</RTDisplay>
-			</Display>
-			<Measurement>
-				<Type>discreet</Type>
-				<Discreets dependencyId="999"></Discreets>
-			</Measurement>
-		</Param>
 		<Param id="97" trending="false">
 			<Name>context_KeyInput</Name>
 			<Description>Unique Input Interface Key</Description>
@@ -372,28 +355,15 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Information>
+				<Subtext>The unique key of the input interface.</Subtext>
+			</Information>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
 			<Measurement>
 				<Type>discreet</Type>
 				<Discreets dependencyId="998"></Discreets>
-			</Measurement>
-		</Param>
-		<Param id="98" trending="false">
-			<Name>context_CMTSName</Name>
-			<Description>CMTS Name</Description>
-			<Type>read</Type>
-			<Interprete>
-				<RawType>other</RawType>
-				<Type>string</Type>
-				<LengthType>next param</LengthType>
-			</Interprete>
-			<Display>
-				<RTDisplay>true</RTDisplay>
-			</Display>
-			<Measurement>
-				<Type>string</Type>
 			</Measurement>
 		</Param>
 		<Param id="99" trending="false">
@@ -405,6 +375,9 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Information>
+				<Subtext>The key of the selected item.</Subtext>
+			</Information>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -645,7 +618,7 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<Param id="149">
-			<Name>PB_GetInterfaces</Name>
+			<Name>pageButtonGetInterfaces</Name>
 			<Description></Description>
 			<Type>write</Type>
 			<Interprete>
@@ -674,7 +647,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="150">
-			<Name>BUT_GetInterfacesFromDCF</Name>
+			<Name>buttonGetInterfacesFromDCF</Name>
 			<Description></Description>
 			<Type>write</Type>
 			<Interprete>
@@ -739,7 +712,7 @@ Any inquiries can be addressed to:
 		
 		
 		<Param id="152" trending="false">
-			<Name>PropertyNameGetInterfaces</Name>
+			<Name>propertyNameGetInterfaces</Name>
 			<Description>Property Name (Get Interfaces)</Description>
 			<Type>read</Type>
 			<Information>
@@ -765,7 +738,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="153" trending="false">
-			<Name>PropertyValueGetInterfaces</Name>
+			<Name>propertyValueGetInterfaces</Name>
 			<Description>Property Value (Get Interfaces)</Description>
 			<Type>read</Type>
 			<Information>
@@ -791,7 +764,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="1152" setter="true">
-			<Name>PropertyNameGetInterfaces</Name>
+			<Name>propertyNameGetInterfaces</Name>
 			<Description>Property Name (Get Interfaces)</Description>
 			<Type>write</Type>
 			<Interprete>
@@ -814,7 +787,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="1153" setter="true">
-			<Name>PropertyValueGetInterfaces</Name>
+			<Name>propertyValueGetInterfaces</Name>
 			<Description>Property Value (Get Interfaces)</Description>
 			<Type>write</Type>
 			<Interprete>
@@ -923,7 +896,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="210">
-			<Name>BUT_SaveUniqueSource</Name>
+			<Name>buttonSaveUniqueSource</Name>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -1021,7 +994,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="1502" setter="true">
 			<Name>dveTableVirtualElementName</Name>
-			<Description>Virtual Element Name (DVE Table)</Description>
+			<Description>Virtual Element Name [IDX] (DVE Table)</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1125,7 +1098,7 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<Param id="510">
-			<Name>BUT_SaveDVEDCF</Name>
+			<Name>buttonSaveDVEDCF</Name>
 			<Description></Description>
 			<Type>write</Type>
 			<Interprete>
@@ -1158,7 +1131,7 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<Param id="998" trending="false" save="true">
-			<Name>AllInputs</Name>
+			<Name>allInputs</Name>
 			<Description>All Inputs</Description>
 			<Type>read</Type>
 			<Information>
@@ -1177,7 +1150,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="999" trending="false" save="true">
-			<Name>AllOutputs</Name>
+			<Name>allOutputs</Name>
 			<Description>All Outputs</Description>
 			<Type>read</Type>
 			<Information>
@@ -1296,7 +1269,7 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<Param id="2000">
-			<Name>Matrix</Name>
+			<Name>matrix</Name>
 			<Description>Matrix</Description>
 			<Type options="dimensions=128,128;columntypes=2002:0-127">array</Type>
 			<!--
@@ -1314,9 +1287,11 @@ Any inquiries can be addressed to:
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 No default thresholds applicable. -->
 			<Alarm>
 				<Monitored>true</Monitored>
 			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -2359,7 +2334,7 @@ Any inquiries can be addressed to:
 			</Measurement>
 		</Param>
 		<Param id="2001">
-			<Name>Matrix</Name>
+			<Name>matrix</Name>
 			<Description>Matrix</Description>
 			<Type options="dimensions=128,128;columntypes=2002:0-127">write</Type>
 			<Interprete>
@@ -2407,24 +2382,25 @@ Any inquiries can be addressed to:
 		</Param>
 		
 		<Param id="2004">
-			<Name>BUT_FindInterface</Name>
+			<Name>buttonFindInterface</Name>
 			<Description></Description>
 			<Type>write</Type>
 			<Information>
-				<Subtext>Find interface</Subtext>
+				<Subtext>Writes all matrix interfaces to the element log</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Message>This will write the interfaces to the element log.</Message>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
 					<Position>
-						<Page>Matrix2</Page>
-						<Row>0</Row>
+						<Page>Matrix</Page>
 						<Column>0</Column>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -2432,7 +2408,7 @@ Any inquiries can be addressed to:
 				<Type width="110">button</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Find Matrix Interface</Display>
+						<Display>Log Matrix Interface</Display>
 						<Value>Find</Value>
 					</Discreet>
 				</Discreets>
@@ -2441,7 +2417,7 @@ Any inquiries can be addressed to:
 		
 		<!--DCFHelper Mapping Parameters-->
 		<Param id="63993">
-			<Name>MAP_StartupElements</Name>
+			<Name>mapStartupElements</Name>
 			<Description>MAP_StartupElements</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -2451,7 +2427,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 		</Param>
 		<Param id="63994">
-			<Name>MAP_NewConnectionProperties</Name>
+			<Name>mapNewConnectionProperties</Name>
 			<Description>MAP_NewConnectionProperties</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -2461,7 +2437,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 		</Param>
 		<Param id="63995">
-			<Name>MAP_NewConnections</Name>
+			<Name>mapNewConnections</Name>
 			<Description>MAP_NewConnections</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -2471,7 +2447,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 		</Param>
 		<Param id="63996">
-			<Name>MAP_NewInterfaceProperties</Name>
+			<Name>mapNewInterfaceProperties</Name>
 			<Description>MAP_NewInterfaceProperties</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -2481,7 +2457,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 		</Param>
 		<Param id="63997" save="true">
-			<Name>MAP_ConnectionProperties</Name>
+			<Name>mapConnectionProperties</Name>
 			<Description>MAP_ConnectionProperties</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -2491,7 +2467,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 		</Param>
 		<Param id="63998" save="true">
-			<Name>MAP_Connections</Name>
+			<Name>mapConnections</Name>
 			<Description>MAP_Connections</Description>
 			<Type>read</Type>
 			<Interprete>
@@ -2501,7 +2477,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 		</Param>
 		<Param id="63999" save="true">
-			<Name>MAP_InterfaceProperties</Name>
+			<Name>mapInterfaceProperties</Name>
 			<Description>MAP_InterfaceProperties</Description>
 			<Type>read</Type>
 			<Interprete>

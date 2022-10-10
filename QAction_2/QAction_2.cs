@@ -34,12 +34,12 @@ DCF Example - DVE
 		protocol.SetParameter(Parameter.help_1, sb.ToString());
 
 		DCFMappingOptions opt = new DCFMappingOptions();
-		opt.PIDcurrentConnections = Parameter.map_connections_63998;
-		opt.PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997;
+		opt.PIDcurrentConnections = Parameter.mapconnections_63998;
+		opt.PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997;
 		opt.HelperType = SyncOption.Custom;
 
 		// Setting a DCFHelper StartupCheckPID will perform startup checks for all defined elements if they haven't already been performed
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
+		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
 			// Creating static connections from virtual A to out A1 and A2 and Virtual B to out B1 and B2. These will never be automatically cleared.
 			// Static connections from virtual A(9) to A1(4) and A2 (5).

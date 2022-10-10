@@ -15,11 +15,11 @@ public class QAction
 		int triggerPid = protocol.GetTriggerParameter();
 		DCFMappingOptions opt = new DCFMappingOptions
 		{
-			PIDcurrentInterfaceProperties = Parameter.map_interfaceproperties_63999,
+			PIDcurrentInterfaceProperties = Parameter.mapinterfaceproperties_63999,
 			HelperType = SyncOption.Custom,
 		};
 
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
+		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
 			string rowKey = protocol.RowKey();
 			DriverinterfacesQActionRow row = protocol.driverinterfaces[rowKey];

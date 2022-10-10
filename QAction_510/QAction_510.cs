@@ -21,15 +21,15 @@ public class QAction
 
 			DCFMappingOptions opt = new DCFMappingOptions
 			{
-				PIDcurrentConnections = Parameter.map_connections_63998,
-				PIDcurrentConnectionProperties = Parameter.map_connectionproperties_63997,
+				PIDcurrentConnections = Parameter.mapconnections_63998,
+				PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997,
 				HelperType = SyncOption.EndOfPolling,
 			};
 
 			// This uses DVEs so they need to be checked for startup, define what the Column is holding the ;element data (Multiple columns can be given and checked).
 			DVEColumn dveCol = new DVEColumn(Parameter.Dvetable.tablePid, Parameter.Dvetable.Idx.dvetablevirtualelementcolumn_504);
 
-			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt, dveCol))
+			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt, dveCol))
 			{
 				for (int i = 0; i < keys.Length; i++)
 				{

@@ -20,7 +20,7 @@ public class QAction
 
 		StringBuilder sb = new StringBuilder();
 
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.map_startupelements_63993, opt))
+		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
 			var results = (object[])protocol.GetParameters(new uint[] { Parameter.propertynamegetinterfaces_152, Parameter.propertyvaluegetinterfaces_153 });
 			string name = Convert.ToString(results[0]);

@@ -1,10 +1,13 @@
 using System;
 using System.Linq;
 
+using Skyline.DataMiner.Net.SLDataGateway.Types;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
 {
+	private static readonly char[] ReservedChars = new char[] { '\\', ';', '/', ':', '*', '?', '"', '<', '>', '|', '°' };
+
 	/// <summary>
 	/// Context menu.
 	/// </summary>
@@ -50,7 +53,8 @@ public class QAction
 				break;
 			case "add dve":
 				string tableKey = sa[2].Trim();
-				if (!protocol.Exists(tableID, tableKey))
+
+				if (IsValidName(protocol, tableKey) && !protocol.Exists(tableID, tableKey))
 				{
 					protocol.AddRow(tableID, tableKey);
 					protocol.SetParameterIndexByKey(tableID, tableKey, 2, "Name "+tableKey);
@@ -73,6 +77,7 @@ public class QAction
 	private static void AddConnection(SLProtocolExt protocol, int tableID, string[] sa)
 	{
 		string tableKeyO = sa[2].Trim();
+
 		if (!protocol.Exists(tableID, tableKeyO))
 			protocol.AddRow(tableID, tableKeyO);
 	}
@@ -165,5 +170,16 @@ public class QAction
 		}
 
 		return newId;
+	}
+
+	private static bool IsValidName(SLProtocol protocol, string name)
+	{
+		if(name.IndexOfAny(ReservedChars) != -1)
+		{
+			protocol.ShowInformationMessage("The specified name '" + name + "' contains invalid characters. ");
+			return false;
+		}
+
+		return true;
 	}
 }

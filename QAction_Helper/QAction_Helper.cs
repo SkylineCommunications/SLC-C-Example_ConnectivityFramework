@@ -28,21 +28,11 @@ public static class Parameter
 	public const int connectionfilter_53 = 53;
 	/// <summary>PID: 53 | Type: read</summary>
 	public const int connectionfilter = 53;
-	/// <summary>PID: 96 | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int context_keyoutput_96 = 96;
-	/// <summary>PID: 96 | Type: read</summary>
-	public const int context_keyoutput = 96;
 	/// <summary>PID: 97 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int context_keyinput_97 = 97;
 	/// <summary>PID: 97 | Type: read</summary>
 	public const int context_keyinput = 97;
-	/// <summary>PID: 98 | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int context_cmtsname_98 = 98;
-	/// <summary>PID: 98 | Type: read</summary>
-	public const int context_cmtsname = 98;
 	/// <summary>PID: 99 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int context_key_99 = 99;
@@ -80,66 +70,66 @@ public static class Parameter
 	public const int column = 2002;
 	/// <summary>PID: 63993 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_startupelements_63993 = 63993;
+	public const int mapstartupelements_63993 = 63993;
 	/// <summary>PID: 63993 | Type: read</summary>
-	public const int map_startupelements = 63993;
+	public const int mapstartupelements = 63993;
 	/// <summary>PID: 63994 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_newconnectionproperties_63994 = 63994;
+	public const int mapnewconnectionproperties_63994 = 63994;
 	/// <summary>PID: 63994 | Type: read</summary>
-	public const int map_newconnectionproperties = 63994;
+	public const int mapnewconnectionproperties = 63994;
 	/// <summary>PID: 63995 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_newconnections_63995 = 63995;
+	public const int mapnewconnections_63995 = 63995;
 	/// <summary>PID: 63995 | Type: read</summary>
-	public const int map_newconnections = 63995;
+	public const int mapnewconnections = 63995;
 	/// <summary>PID: 63996 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_newinterfaceproperties_63996 = 63996;
+	public const int mapnewinterfaceproperties_63996 = 63996;
 	/// <summary>PID: 63996 | Type: read</summary>
-	public const int map_newinterfaceproperties = 63996;
+	public const int mapnewinterfaceproperties = 63996;
 	/// <summary>PID: 63997 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_connectionproperties_63997 = 63997;
+	public const int mapconnectionproperties_63997 = 63997;
 	/// <summary>PID: 63997 | Type: read</summary>
-	public const int map_connectionproperties = 63997;
+	public const int mapconnectionproperties = 63997;
 	/// <summary>PID: 63998 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_connections_63998 = 63998;
+	public const int mapconnections_63998 = 63998;
 	/// <summary>PID: 63998 | Type: read</summary>
-	public const int map_connections = 63998;
+	public const int mapconnections = 63998;
 	/// <summary>PID: 63999 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int map_interfaceproperties_63999 = 63999;
+	public const int mapinterfaceproperties_63999 = 63999;
 	/// <summary>PID: 63999 | Type: read</summary>
-	public const int map_interfaceproperties = 63999;
+	public const int mapinterfaceproperties = 63999;
 	public class Write
 	{
 		/// <summary>PID: 52 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int but_removevirtualaconnections_52 = 52;
+		public const int buttonremovevirtualaconnections_52 = 52;
 		/// <summary>PID: 52 | Type: write</summary>
-		public const int but_removevirtualaconnections = 52;
+		public const int buttonremovevirtualaconnections = 52;
 		/// <summary>PID: 149 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int pb_getinterfaces_149 = 149;
+		public const int pagebuttongetinterfaces_149 = 149;
 		/// <summary>PID: 149 | Type: write</summary>
-		public const int pb_getinterfaces = 149;
+		public const int pagebuttongetinterfaces = 149;
 		/// <summary>PID: 150 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int but_getinterfacesfromdcf_150 = 150;
+		public const int buttongetinterfacesfromdcf_150 = 150;
 		/// <summary>PID: 150 | Type: write</summary>
-		public const int but_getinterfacesfromdcf = 150;
+		public const int buttongetinterfacesfromdcf = 150;
 		/// <summary>PID: 210 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int but_saveuniquesource_210 = 210;
+		public const int buttonsaveuniquesource_210 = 210;
 		/// <summary>PID: 210 | Type: write</summary>
-		public const int but_saveuniquesource = 210;
+		public const int buttonsaveuniquesource = 210;
 		/// <summary>PID: 510 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int but_savedvedcf_510 = 510;
+		public const int buttonsavedvedcf_510 = 510;
 		/// <summary>PID: 510 | Type: write</summary>
-		public const int but_savedvedcf = 510;
+		public const int buttonsavedvedcf = 510;
 		/// <summary>PID: 1050 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int mode_1050 = 1050;
@@ -217,9 +207,9 @@ public static class Parameter
 		public const int matrix = 2001;
 		/// <summary>PID: 2004 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int but_findinterface_2004 = 2004;
+		public const int buttonfindinterface_2004 = 2004;
 		/// <summary>PID: 2004 | Type: write</summary>
-		public const int but_findinterface = 2004;
+		public const int buttonfindinterface = 2004;
 	}
 	public class Driverinterfaces
 	{
@@ -415,15 +405,15 @@ public static class Parameter
 public class WriteParameters
 {
 	/// <summary>PID: 52  | Type: write | DISCREETS: Remove Virtual A Connection = 1</summary>
-	public System.Object But_removevirtualaconnections {get { return Protocol.GetParameter(52); }set { Protocol.SetParameter(52, value); }}
+	public System.Object Buttonremovevirtualaconnections {get { return Protocol.GetParameter(52); }set { Protocol.SetParameter(52, value); }}
 	/// <summary>PID: 149  | Type: write | DISCREETS: Get Interfaces... = Get Interfaces</summary>
-	public System.Object Pb_getinterfaces {get { return Protocol.GetParameter(149); }set { Protocol.SetParameter(149, value); }}
+	public System.Object Pagebuttongetinterfaces {get { return Protocol.GetParameter(149); }set { Protocol.SetParameter(149, value); }}
 	/// <summary>PID: 150  | Type: write | DISCREETS: Get Interfaces (DCF Data) = 1</summary>
-	public System.Object But_getinterfacesfromdcf {get { return Protocol.GetParameter(150); }set { Protocol.SetParameter(150, value); }}
+	public System.Object Buttongetinterfacesfromdcf {get { return Protocol.GetParameter(150); }set { Protocol.SetParameter(150, value); }}
 	/// <summary>PID: 210  | Type: write | DISCREETS: Save to DCF = 1</summary>
-	public System.Object But_saveuniquesource {get { return Protocol.GetParameter(210); }set { Protocol.SetParameter(210, value); }}
+	public System.Object Buttonsaveuniquesource {get { return Protocol.GetParameter(210); }set { Protocol.SetParameter(210, value); }}
 	/// <summary>PID: 510  | Type: write | DISCREETS: Save to DCF = 1</summary>
-	public System.Object But_savedvedcf {get { return Protocol.GetParameter(510); }set { Protocol.SetParameter(510, value); }}
+	public System.Object Buttonsavedvedcf {get { return Protocol.GetParameter(510); }set { Protocol.SetParameter(510, value); }}
 	/// <summary>PID: 1050  | Type: write | DISCREETS: 1-Channel = 0, 2-Channel = 1</summary>
 	public System.Object Mode {get { return Protocol.GetParameter(1050); }set { Protocol.SetParameter(1050, value); }}
 	/// <summary>PID: 1051  | Type: write | DISCREETS: Normal = 0, Crossed = 1</summary>
@@ -454,8 +444,8 @@ public class WriteParameters
 	public System.Object Dvetablevirtualelementdestination {get { return Protocol.GetParameter(1503); }set { Protocol.SetParameter(1503, value); }}
 	/// <summary>PID: 2001  | Type: write</summary>
 	public System.Object Matrix {get { return Protocol.GetParameter(2001); }set { Protocol.SetParameter(2001, value); }}
-	/// <summary>PID: 2004  | Type: write | DISCREETS: Find Matrix Interface = Find</summary>
-	public System.Object But_findinterface {get { return Protocol.GetParameter(2004); }set { Protocol.SetParameter(2004, value); }}
+	/// <summary>PID: 2004  | Type: write | DISCREETS: Log Matrix Interface = Find</summary>
+	public System.Object Buttonfindinterface {get { return Protocol.GetParameter(2004); }set { Protocol.SetParameter(2004, value); }}
 	public SLProtocolExt Protocol;
 	public WriteParameters(SLProtocolExt protocol)
 	{
@@ -479,16 +469,12 @@ public interface SLProtocolExt : SLProtocol
 	object Mode { get; set; }
 	object Inputselection_51 { get; set; }
 	object Inputselection { get; set; }
-	object But_removevirtualaconnections_52 { get; set; }
-	object But_removevirtualaconnections { get; set; }
+	object Buttonremovevirtualaconnections_52 { get; set; }
+	object Buttonremovevirtualaconnections { get; set; }
 	object Connectionfilter_53 { get; set; }
 	object Connectionfilter { get; set; }
-	object Context_keyoutput_96 { get; set; }
-	object Context_keyoutput { get; set; }
 	object Context_keyinput_97 { get; set; }
 	object Context_keyinput { get; set; }
-	object Context_cmtsname_98 { get; set; }
-	object Context_cmtsname { get; set; }
 	object Context_key_99 { get; set; }
 	object Context_key { get; set; }
 	object Driverinterfaceskey_111 { get; set; }
@@ -503,10 +489,10 @@ public interface SLProtocolExt : SLProtocol
 	object Driverinterfacesinterfacepropertya { get; set; }
 	object Driverinterfacesinterfacepropertyb_116 { get; set; }
 	object Driverinterfacesinterfacepropertyb { get; set; }
-	object Pb_getinterfaces_149 { get; set; }
-	object Pb_getinterfaces { get; set; }
-	object But_getinterfacesfromdcf_150 { get; set; }
-	object But_getinterfacesfromdcf { get; set; }
+	object Pagebuttongetinterfaces_149 { get; set; }
+	object Pagebuttongetinterfaces { get; set; }
+	object Buttongetinterfacesfromdcf_150 { get; set; }
+	object Buttongetinterfacesfromdcf { get; set; }
 	object Getinterfacesresult_151 { get; set; }
 	object Getinterfacesresult { get; set; }
 	object Propertynamegetinterfaces_152 { get; set; }
@@ -517,8 +503,8 @@ public interface SLProtocolExt : SLProtocol
 	object Uniquesourceconnectionssourceinterface { get; set; }
 	object Uniquesourceconnectionsdestinationinterface_202 { get; set; }
 	object Uniquesourceconnectionsdestinationinterface { get; set; }
-	object But_saveuniquesource_210 { get; set; }
-	object But_saveuniquesource { get; set; }
+	object Buttonsaveuniquesource_210 { get; set; }
+	object Buttonsaveuniquesource { get; set; }
 	object Dvetablevirtualelementkey_501 { get; set; }
 	object Dvetablevirtualelementkey { get; set; }
 	object Dvetablevirtualelementname_502 { get; set; }
@@ -527,8 +513,8 @@ public interface SLProtocolExt : SLProtocol
 	object Dvetablevirtualelementdestination { get; set; }
 	object Dvetablevirtualelementcolumn_504 { get; set; }
 	object Dvetablevirtualelementcolumn { get; set; }
-	object But_savedvedcf_510 { get; set; }
-	object But_savedvedcf { get; set; }
+	object Buttonsavedvedcf_510 { get; set; }
+	object Buttonsavedvedcf { get; set; }
 	object Allinputs_998 { get; set; }
 	object Allinputs { get; set; }
 	object Alloutputs_999 { get; set; }
@@ -555,22 +541,22 @@ public interface SLProtocolExt : SLProtocol
 	object Column_2002 { get; set; }
 	object Column { get; set; }
 	object Discreetinfo_discreetinfo { get; set; }
-	object But_findinterface_2004 { get; set; }
-	object But_findinterface { get; set; }
-	object Map_startupelements_63993 { get; set; }
-	object Map_startupelements { get; set; }
-	object Map_newconnectionproperties_63994 { get; set; }
-	object Map_newconnectionproperties { get; set; }
-	object Map_newconnections_63995 { get; set; }
-	object Map_newconnections { get; set; }
-	object Map_newinterfaceproperties_63996 { get; set; }
-	object Map_newinterfaceproperties { get; set; }
-	object Map_connectionproperties_63997 { get; set; }
-	object Map_connectionproperties { get; set; }
-	object Map_connections_63998 { get; set; }
-	object Map_connections { get; set; }
-	object Map_interfaceproperties_63999 { get; set; }
-	object Map_interfaceproperties { get; set; }
+	object Buttonfindinterface_2004 { get; set; }
+	object Buttonfindinterface { get; set; }
+	object Mapstartupelements_63993 { get; set; }
+	object Mapstartupelements { get; set; }
+	object Mapnewconnectionproperties_63994 { get; set; }
+	object Mapnewconnectionproperties { get; set; }
+	object Mapnewconnections_63995 { get; set; }
+	object Mapnewconnections { get; set; }
+	object Mapnewinterfaceproperties_63996 { get; set; }
+	object Mapnewinterfaceproperties { get; set; }
+	object Mapconnectionproperties_63997 { get; set; }
+	object Mapconnectionproperties { get; set; }
+	object Mapconnections_63998 { get; set; }
+	object Mapconnections { get; set; }
+	object Mapinterfaceproperties_63999 { get; set; }
+	object Mapinterfaceproperties { get; set; }
 	WriteParameters Write { get; set; }
 }
 public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
@@ -601,29 +587,19 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 51  | Type: read | DISCREETS: Normal = 0, Crossed = 1</summary>
 	public System.Object Inputselection {get { return GetParameter(51); }set { SetParameter(51, value); }}
 	/// <summary>PID: 52  | Type: write | DISCREETS: Remove Virtual A Connection = 1</summary>
-	public System.Object But_removevirtualaconnections_52 {get { return GetParameter(52); }set { SetParameter(52, value); }}
+	public System.Object Buttonremovevirtualaconnections_52 {get { return GetParameter(52); }set { SetParameter(52, value); }}
 	/// <summary>PID: 52  | Type: write | DISCREETS: Remove Virtual A Connection = 1</summary>
-	public System.Object But_removevirtualaconnections {get { return Write.But_removevirtualaconnections; }set { Write.But_removevirtualaconnections = value; }}
+	public System.Object Buttonremovevirtualaconnections {get { return Write.Buttonremovevirtualaconnections; }set { Write.Buttonremovevirtualaconnections = value; }}
 	/// <summary>PID: 53  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Connectionfilter_53 {get { return GetParameter(53); }set { SetParameter(53, value); }}
 	/// <summary>PID: 53  | Type: read</summary>
 	public System.Object Connectionfilter {get { return GetParameter(53); }set { SetParameter(53, value); }}
-	/// <summary>PID: 96  | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Context_keyoutput_96 {get { return GetParameter(96); }set { SetParameter(96, value); }}
-	/// <summary>PID: 96  | Type: read</summary>
-	public System.Object Context_keyoutput {get { return GetParameter(96); }set { SetParameter(96, value); }}
 	/// <summary>PID: 97  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Context_keyinput_97 {get { return GetParameter(97); }set { SetParameter(97, value); }}
 	/// <summary>PID: 97  | Type: read</summary>
 	public System.Object Context_keyinput {get { return GetParameter(97); }set { SetParameter(97, value); }}
-	/// <summary>PID: 98  | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Context_cmtsname_98 {get { return GetParameter(98); }set { SetParameter(98, value); }}
-	/// <summary>PID: 98  | Type: read</summary>
-	public System.Object Context_cmtsname {get { return GetParameter(98); }set { SetParameter(98, value); }}
 	/// <summary>PID: 99  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Context_key_99 {get { return GetParameter(99); }set { SetParameter(99, value); }}
@@ -660,13 +636,13 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 116  | Type: read</summary>
 	public System.Object Driverinterfacesinterfacepropertyb {get { return GetParameter(116); }set { SetParameter(116, value); }}
 	/// <summary>PID: 149  | Type: write | DISCREETS: Get Interfaces... = Get Interfaces</summary>
-	public System.Object Pb_getinterfaces_149 {get { return GetParameter(149); }set { SetParameter(149, value); }}
+	public System.Object Pagebuttongetinterfaces_149 {get { return GetParameter(149); }set { SetParameter(149, value); }}
 	/// <summary>PID: 149  | Type: write | DISCREETS: Get Interfaces... = Get Interfaces</summary>
-	public System.Object Pb_getinterfaces {get { return Write.Pb_getinterfaces; }set { Write.Pb_getinterfaces = value; }}
+	public System.Object Pagebuttongetinterfaces {get { return Write.Pagebuttongetinterfaces; }set { Write.Pagebuttongetinterfaces = value; }}
 	/// <summary>PID: 150  | Type: write | DISCREETS: Get Interfaces (DCF Data) = 1</summary>
-	public System.Object But_getinterfacesfromdcf_150 {get { return GetParameter(150); }set { SetParameter(150, value); }}
+	public System.Object Buttongetinterfacesfromdcf_150 {get { return GetParameter(150); }set { SetParameter(150, value); }}
 	/// <summary>PID: 150  | Type: write | DISCREETS: Get Interfaces (DCF Data) = 1</summary>
-	public System.Object But_getinterfacesfromdcf {get { return Write.But_getinterfacesfromdcf; }set { Write.But_getinterfacesfromdcf = value; }}
+	public System.Object Buttongetinterfacesfromdcf {get { return Write.Buttongetinterfacesfromdcf; }set { Write.Buttongetinterfacesfromdcf = value; }}
 	/// <summary>PID: 151  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getinterfacesresult_151 {get { return GetParameter(151); }set { SetParameter(151, value); }}
@@ -693,9 +669,9 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 202  | Type: read</summary>
 	public System.Object Uniquesourceconnectionsdestinationinterface {get { return GetParameter(202); }set { SetParameter(202, value); }}
 	/// <summary>PID: 210  | Type: write | DISCREETS: Save to DCF = 1</summary>
-	public System.Object But_saveuniquesource_210 {get { return GetParameter(210); }set { SetParameter(210, value); }}
+	public System.Object Buttonsaveuniquesource_210 {get { return GetParameter(210); }set { SetParameter(210, value); }}
 	/// <summary>PID: 210  | Type: write | DISCREETS: Save to DCF = 1</summary>
-	public System.Object But_saveuniquesource {get { return Write.But_saveuniquesource; }set { Write.But_saveuniquesource = value; }}
+	public System.Object Buttonsaveuniquesource {get { return Write.Buttonsaveuniquesource; }set { Write.Buttonsaveuniquesource = value; }}
 	/// <summary>PID: 501  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Dvetablevirtualelementkey_501 {get { return GetParameter(501); }set { SetParameter(501, value); }}
@@ -717,9 +693,9 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 504  | Type: read</summary>
 	public System.Object Dvetablevirtualelementcolumn {get { return GetParameter(504); }set { SetParameter(504, value); }}
 	/// <summary>PID: 510  | Type: write | DISCREETS: Save to DCF = 1</summary>
-	public System.Object But_savedvedcf_510 {get { return GetParameter(510); }set { SetParameter(510, value); }}
+	public System.Object Buttonsavedvedcf_510 {get { return GetParameter(510); }set { SetParameter(510, value); }}
 	/// <summary>PID: 510  | Type: write | DISCREETS: Save to DCF = 1</summary>
-	public System.Object But_savedvedcf {get { return Write.But_savedvedcf; }set { Write.But_savedvedcf = value; }}
+	public System.Object Buttonsavedvedcf {get { return Write.Buttonsavedvedcf; }set { Write.Buttonsavedvedcf = value; }}
 	/// <summary>PID: 998  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Allinputs_998 {get { return GetParameter(998); }set { SetParameter(998, value); }}
@@ -786,45 +762,45 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Column {get { return GetParameter(2002); }set { SetParameter(2002, value); }}
 	/// <summary>PID: 2003  | Type: discreet info</summary>
 	public System.Object Discreetinfo_discreetinfo {get { return GetParameter(2003); }set { SetParameter(2003, value); }}
-	/// <summary>PID: 2004  | Type: write | DISCREETS: Find Matrix Interface = Find</summary>
-	public System.Object But_findinterface_2004 {get { return GetParameter(2004); }set { SetParameter(2004, value); }}
-	/// <summary>PID: 2004  | Type: write | DISCREETS: Find Matrix Interface = Find</summary>
-	public System.Object But_findinterface {get { return Write.But_findinterface; }set { Write.But_findinterface = value; }}
+	/// <summary>PID: 2004  | Type: write | DISCREETS: Log Matrix Interface = Find</summary>
+	public System.Object Buttonfindinterface_2004 {get { return GetParameter(2004); }set { SetParameter(2004, value); }}
+	/// <summary>PID: 2004  | Type: write | DISCREETS: Log Matrix Interface = Find</summary>
+	public System.Object Buttonfindinterface {get { return Write.Buttonfindinterface; }set { Write.Buttonfindinterface = value; }}
 	/// <summary>PID: 63993  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_startupelements_63993 {get { return GetParameter(63993); }set { SetParameter(63993, value); }}
+	public System.Object Mapstartupelements_63993 {get { return GetParameter(63993); }set { SetParameter(63993, value); }}
 	/// <summary>PID: 63993  | Type: read</summary>
-	public System.Object Map_startupelements {get { return GetParameter(63993); }set { SetParameter(63993, value); }}
+	public System.Object Mapstartupelements {get { return GetParameter(63993); }set { SetParameter(63993, value); }}
 	/// <summary>PID: 63994  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_newconnectionproperties_63994 {get { return GetParameter(63994); }set { SetParameter(63994, value); }}
+	public System.Object Mapnewconnectionproperties_63994 {get { return GetParameter(63994); }set { SetParameter(63994, value); }}
 	/// <summary>PID: 63994  | Type: read</summary>
-	public System.Object Map_newconnectionproperties {get { return GetParameter(63994); }set { SetParameter(63994, value); }}
+	public System.Object Mapnewconnectionproperties {get { return GetParameter(63994); }set { SetParameter(63994, value); }}
 	/// <summary>PID: 63995  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_newconnections_63995 {get { return GetParameter(63995); }set { SetParameter(63995, value); }}
+	public System.Object Mapnewconnections_63995 {get { return GetParameter(63995); }set { SetParameter(63995, value); }}
 	/// <summary>PID: 63995  | Type: read</summary>
-	public System.Object Map_newconnections {get { return GetParameter(63995); }set { SetParameter(63995, value); }}
+	public System.Object Mapnewconnections {get { return GetParameter(63995); }set { SetParameter(63995, value); }}
 	/// <summary>PID: 63996  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_newinterfaceproperties_63996 {get { return GetParameter(63996); }set { SetParameter(63996, value); }}
+	public System.Object Mapnewinterfaceproperties_63996 {get { return GetParameter(63996); }set { SetParameter(63996, value); }}
 	/// <summary>PID: 63996  | Type: read</summary>
-	public System.Object Map_newinterfaceproperties {get { return GetParameter(63996); }set { SetParameter(63996, value); }}
+	public System.Object Mapnewinterfaceproperties {get { return GetParameter(63996); }set { SetParameter(63996, value); }}
 	/// <summary>PID: 63997  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_connectionproperties_63997 {get { return GetParameter(63997); }set { SetParameter(63997, value); }}
+	public System.Object Mapconnectionproperties_63997 {get { return GetParameter(63997); }set { SetParameter(63997, value); }}
 	/// <summary>PID: 63997  | Type: read</summary>
-	public System.Object Map_connectionproperties {get { return GetParameter(63997); }set { SetParameter(63997, value); }}
+	public System.Object Mapconnectionproperties {get { return GetParameter(63997); }set { SetParameter(63997, value); }}
 	/// <summary>PID: 63998  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_connections_63998 {get { return GetParameter(63998); }set { SetParameter(63998, value); }}
+	public System.Object Mapconnections_63998 {get { return GetParameter(63998); }set { SetParameter(63998, value); }}
 	/// <summary>PID: 63998  | Type: read</summary>
-	public System.Object Map_connections {get { return GetParameter(63998); }set { SetParameter(63998, value); }}
+	public System.Object Mapconnections {get { return GetParameter(63998); }set { SetParameter(63998, value); }}
 	/// <summary>PID: 63999  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Map_interfaceproperties_63999 {get { return GetParameter(63999); }set { SetParameter(63999, value); }}
+	public System.Object Mapinterfaceproperties_63999 {get { return GetParameter(63999); }set { SetParameter(63999, value); }}
 	/// <summary>PID: 63999  | Type: read</summary>
-	public System.Object Map_interfaceproperties {get { return GetParameter(63999); }set { SetParameter(63999, value); }}
+	public System.Object Mapinterfaceproperties {get { return GetParameter(63999); }set { SetParameter(63999, value); }}
 	public WriteParameters Write { get; set; }
 	public ConcreteSLProtocolExt()
 	{
