@@ -65,13 +65,13 @@ Any inquiries can be addressed to:
 		<Group id="1" name="Fixed Input Port A" type="in" />
 		<Group id="2" name="Fixed Input Port B" type="in" />
 
-		<Group id="21" name="Fixed Output Port A1" type="out" />
-		<Group id="22" name="Fixed Output Port A2" type="out" />
-		<Group id="23" name="Fixed Output Port B1" type="out" />
-		<Group id="24" name="Fixed Output Port B2" type="out" />
+		<Group id="4" name="Fixed Output Port A1" type="out" />
+		<Group id="5" name="Fixed Output Port A2" type="out" />
+		<Group id="6" name="Fixed Output Port B1" type="out" />
+		<Group id="7" name="Fixed Output Port B2" type="out" />
 
-		<Group id="41" name="Virtual InOut Port A" type="inout" />
-		<Group id="42" name="Virtual InOut Port B" type="inout" />
+		<Group id="9" name="Virtual InOut Port A" type="inout" />
+		<Group id="10" name="Virtual InOut Port B" type="inout" />
 
 		<Group id="100" name="Dynamic Table IN" type="in" dynamicId="100" dynamicIndex="I_*" />
 		<Group id="101" name="Dynamic Table OUT" type="out" dynamicId="100" dynamicIndex="O_*" />
