@@ -54,7 +54,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Virtual</ElementType>
 	<Type relativeTimers="true" options="exportProtocol:SLC SDF DCF - DVE:500">virtual</Type>
-	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;Matrix" wideColumnPages="General" />
+	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;DCF Example - Matrix" wideColumnPages="General" />
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -1296,9 +1296,9 @@ Any inquiries can be addressed to:
 				<RTDisplay>true</RTDisplay>
 				<Positions>
 					<Position>
-						<Page>Matrix</Page>
-						<Row>0</Row>
+						<Page>DCF Example - Matrix</Page>
 						<Column>0</Column>
+						<Row>0</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -2346,9 +2346,9 @@ Any inquiries can be addressed to:
 				<RTDisplay>true</RTDisplay>
 				<Positions>
 					<Position>
-						<Page>Matrix</Page>
-						<Row>0</Row>
+						<Page>DCF Example - Matrix</Page>
 						<Column>0</Column>
+						<Row>0</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -2398,7 +2398,7 @@ Any inquiries can be addressed to:
 				<RTDisplay>true</RTDisplay>
 				<Positions>
 					<Position>
-						<Page>Matrix</Page>
+						<Page>DCF Example - Matrix</Page>
 						<Column>0</Column>
 						<Row>1</Row>
 					</Position>

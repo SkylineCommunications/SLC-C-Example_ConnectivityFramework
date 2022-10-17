@@ -29,7 +29,12 @@ DCF Example - Unique Source
 	The Unique Source example allows you to add rows to the table to specify a connection where each source interface can only have a single connection.
 DCF Example - DVE
 	Allows a user to add DVE's to the driver. Each DVE has one Source interface and two destinations.
-	Depending on the Destination togglebutton the connection inside of the DVE will be different.");
+	Depending on the Destination togglebutton the connection inside of the DVE will be different.
+DCF Example - Matrix
+    Displays a matrix that's connected to the DCF module in DataMiner.
+    Every Input and Output is an interface and every connection you make on the matrix will automatically create a DCF connection in the background.
+    The Log Matrix Interface button runs a small example code that will filter and show every interface made from the Matrix in the logging.
+");
 		sb.AppendLine();
 		protocol.SetParameter(Parameter.help_1, sb.ToString());
 
