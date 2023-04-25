@@ -44,10 +44,6 @@
       <Project>{DBBE85AF-8860-4885-943D-2EFE3EA13FBD}</Project>
       <Name>QAction_Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\QAction_ClassLibrary\QAction_ClassLibrary.csproj">
-      <Project>{3AB9831F-9D6E-462B-81FC-67CA23B26A1B}</Project>
-      <Name>QAction_ClassLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\QAction_1\QAction_1.csproj">
       <Project>{B27C3F2A-CB7A-427A-AD7B-F3A2DB7AACE0}</Project>
       <Name>QAction_1</Name>
@@ -72,7 +68,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties DisLinkId="150" DisProjectType="qactionProject" DisLinkedXmlFile="..\protocol.xml" />
+      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisProjectType="qactionProject" DisLinkId="150" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

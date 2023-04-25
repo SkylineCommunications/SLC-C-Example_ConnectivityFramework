@@ -565,13 +565,10 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		<Param id="116" trending="false">
-			<Name>driverInterfacesInterfacePropertyB</Name>
-			<Description>Interface Property B (Driver Interfaces)</Description>
-			<Type>read</Type>
-			<Information>
-				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
-			</Information>
+		<Param id="1115" setter="true">
+			<Name>driverInterfacesInterfacePropertyA</Name>
+			<Description>Interface Property A (Driver Interfaces)</Description>
+			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -584,10 +581,13 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		<Param id="1115" setter="true">
-			<Name>driverInterfacesInterfacePropertyA</Name>
-			<Description>Interface Property A (Driver Interfaces)</Description>
-			<Type>write</Type>
+		<Param id="116" trending="false">
+			<Name>driverInterfacesInterfacePropertyB</Name>
+			<Description>Interface Property B (Driver Interfaces)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The value for a property that will be put on Interface. There can be many properties, this example only has 2.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -737,6 +737,29 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
+		<Param id="1152" setter="true">
+			<Name>propertyNameGetInterfaces</Name>
+			<Description>Property Name (Get Interfaces)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Get Interfaces</Page>
+						<Row>0</Row>
+						<Column>0</Column>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
 		<Param id="153" trending="false">
 			<Name>propertyValueGetInterfaces</Name>
 			<Description>Property Value (Get Interfaces)</Description>
@@ -755,29 +778,6 @@ Any inquiries can be addressed to:
 					<Position>
 						<Page>Get Interfaces</Page>
 						<Row>1</Row>
-						<Column>0</Column>
-					</Position>
-				</Positions>
-			</Display>
-			<Measurement>
-				<Type>string</Type>
-			</Measurement>
-		</Param>
-		<Param id="1152" setter="true">
-			<Name>propertyNameGetInterfaces</Name>
-			<Description>Property Name (Get Interfaces)</Description>
-			<Type>write</Type>
-			<Interprete>
-				<RawType>other</RawType>
-				<Type>string</Type>
-				<LengthType>next param</LengthType>
-			</Interprete>
-			<Display>
-				<RTDisplay>true</RTDisplay>
-				<Positions>
-					<Position>
-						<Page>Get Interfaces</Page>
-						<Row>0</Row>
 						<Column>0</Column>
 					</Position>
 				</Positions>
