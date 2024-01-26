@@ -1,7 +1,7 @@
 ﻿<!--
 
 ****************************************************************************
-*  Copyright (c) 2022,  Skyline Communications NV  All Rights Reserved.    *
+*  Copyright (c) 2024,  Skyline Communications NV  All Rights Reserved.    *
 ****************************************************************************
 
 By using this driver, you expressly agree with the usage terms and
@@ -44,16 +44,16 @@ Any inquiries can be addressed to:
 -->
 
 <Protocol xmlns="http://www.skyline.be/protocol">
-	<Name>SLC SDF DCF</Name>
-	<Description>DataMiner Connectivity Framework</Description>
-	<Version>1.0.0.2</Version>
-	<IntegrationID>DMS-DRV-12345</IntegrationID>
+	<Name>Skyline Example ConnectivityFramework</Name>
+	<Description>Skyline Example ConnectivityFramework</Description>
+	<Version>1.0.0.1</Version>
+	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Skyline</Vendor>
 	<VendorOID>1.3.6.1.4.1.8813.2.0</VendorOID>
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Virtual</ElementType>
-	<Type relativeTimers="true" options="exportProtocol:SLC SDF DCF - DVE:500">virtual</Type>
+	<Type relativeTimers="true" options="exportProtocol:Skyline Example ConnectivityFramework - DVE:500">virtual</Type>
 	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;DCF Example - Matrix" wideColumnPages="General" />
 	<SNMP includepages="true">auto</SNMP>
 
@@ -2561,21 +2561,12 @@ Any inquiries can be addressed to:
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
-											<NewFeature>Initial version, converted from Examples/Protocols/DCF version 1.0.0.8.</NewFeature>
+											<Change>Migrated to using Skyline.DataMiner.Core.ConnectivityFramework</Change>
+											<Change>Initial version, converted from SLC SDF DCF version 1.0.0.1.</Change>
 										</Changes>
 										<References>
-											<TaskId>194964</TaskId>
+											<TaskId>230957</TaskId>
 										</References>
-									</MinorVersion>
-									<MinorVersion id="2" basedOn="1.0.0.1">
-										<Date>2024-01-26</Date>
-										<Provider>
-											<Author>JST</Author>
-											<Company>Skyline Communications</Company>
-										</Provider>
-										<Changes>
-											<Change>Migrated to using Skyline.DataMiner.Core.ConnectivityFramework</Change>
-										</Changes>
 									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
