@@ -88,6 +88,7 @@ Any inquiries can be addressed to:
 	<ExportRules>
 		<ExportRule table="500" tag="Protocol/Display" attribute="pageOrder" value="General" />
 		<ExportRule table="500" tag="Protocol/Display" attribute="wideColumnPages" value="" />
+		<ExportRule table="500" tag="Protocol/Display" attribute="defaultPage" value="General" />
 	</ExportRules>
 
 	<Params>
