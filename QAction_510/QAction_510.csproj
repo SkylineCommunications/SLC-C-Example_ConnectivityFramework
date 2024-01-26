@@ -44,10 +44,6 @@
       <Project>{DBBE85AF-8860-4885-943D-2EFE3EA13FBD}</Project>
       <Name>QAction_Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\QAction_1\QAction_1.csproj">
-      <Project>{B27C3F2A-CB7A-427A-AD7B-F3A2DB7AACE0}</Project>
-      <Name>QAction_1</Name>
-    </ProjectReference>
     <AdditionalFiles Include="stylecop.json" />
     <Content Include=".editorconfig" />
   </ItemGroup>
@@ -56,8 +52,11 @@
     <Compile Include="QAction_510.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Skyline.DataMiner.Core.ConnectivityFramework.Protocol">
+      <Version>1.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol">
-      <Version>10.0.0.5</Version>
+      <Version>10.1.12</Version>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
       <Version>1.1.118</Version>
@@ -68,7 +67,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisProjectType="qactionProject" DisLinkId="510" />
+      <UserProperties DisLinkId="510" DisProjectType="qactionProject" DisLinkedXmlFile="..\protocol.xml" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

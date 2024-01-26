@@ -1,7 +1,8 @@
 using System.Linq;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
@@ -12,20 +13,18 @@ public class QAction
 	/// <param name="protocol">Link with SLProtocol connection.</param>
 	public static void Run(SLProtocol protocol)
 	{
-		DCFMappingOptions opt = new DCFMappingOptions
+		DcfMappingOptions opt = new DcfMappingOptions
 		{
 			HelperType = SyncOption.Custom,
 			PIDcurrentConnections = Parameter.mapconnections_63998,
 			PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997,
 		};
 
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
+		using (DcfHelper dcf = new DcfHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
-			var sourceInterfaces = dcf.GetInterfaces(new DCFDynamicLink(9));
+			var sourceInterface = dcf.GetInterface(new DcfInterfaceFilterSingle(9));
 
 			// Fixed Properties and Fixed Connections = Remove Everything yourself
-			ConnectivityInterface sourceInterface = sourceInterfaces[0].FirstInterface;
-
 			if (sourceInterface != null)
 			{
 				var connections = sourceInterface.GetConnections(); // returns all connection where the given Interface is the SOURCE interface

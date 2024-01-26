@@ -1,8 +1,10 @@
 using System;
 using System.Text;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Filters;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
@@ -13,20 +15,20 @@ public class QAction
 	/// <param name="protocol">Link with SLProtocol process.</param>
 	public static void Run(SLProtocolExt protocol)
 	{
-		DCFMappingOptions opt = new DCFMappingOptions
+		DcfMappingOptions opt = new DcfMappingOptions
 		{
 			HelperType = SyncOption.Custom,
 		};
 
 		StringBuilder sb = new StringBuilder();
 
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
+		using (DcfHelper dcf = new DcfHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
 			var results = (object[])protocol.GetParameters(new uint[] { Parameter.propertynamegetinterfaces_152, Parameter.propertyvaluegetinterfaces_153 });
 			string name = Convert.ToString(results[0]);
 			string value = Convert.ToString(results[1]);
 
-			var allInterfaces = dcf.GetInterfaces(new DCFDynamicLink(new PropertyFilter(name, value)))[0].AllInterfaces;
+			var allInterfaces = dcf.GetInterfaces(new DcfInterfaceFilterMulti(new DcfPropertyFilter(name, value)));
 			foreach (var interf in allInterfaces)
 			{
 				sb.AppendLine("Interface found: " + interf.InterfaceId + " with name: " + interf.InterfaceName);

@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
@@ -13,13 +15,13 @@ public class QAction
 	public static void Run(SLProtocolExt protocol)
 	{
 		int triggerPid = protocol.GetTriggerParameter();
-		DCFMappingOptions opt = new DCFMappingOptions
+		DcfMappingOptions opt = new DcfMappingOptions
 		{
 			PIDcurrentInterfaceProperties = Parameter.mapinterfaceproperties_63999,
 			HelperType = SyncOption.Custom,
 		};
 
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
+		using (DcfHelper dcf = new DcfHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
 			string rowKey = protocol.RowKey();
 			DriverinterfacesQActionRow row = protocol.driverinterfaces[rowKey];
@@ -42,7 +44,8 @@ public class QAction
 					break;
 			}
 
-			var foundInterface = dcf.GetInterfaces(new DCFDynamicLink(parameterGroupID, rowKey))[0].FirstInterface;
+			var foundInterface = dcf.GetInterface(new DcfInterfaceFilterSingle(parameterGroupID, rowKey));
+
 			string propertyName;
 			string propertyValue;
 			if (triggerPid == 1115)
@@ -55,10 +58,9 @@ public class QAction
 			}
 
 			propertyValue = Convert.ToString(protocol.GetParameter(triggerPid));
-			dcf.SaveInterfaceProperties(
-				foundInterface,
-				full: false,
-				new ConnectivityInterfaceProperty { InterfacePropertyName = propertyName, InterfacePropertyType = propertyType, InterfacePropertyValue = propertyValue });
+			var propertyRequest = new DcfSaveInterfacePropertyRequest(propertyName, propertyType, propertyValue);
+
+			dcf.SaveInterfaceProperties(foundInterface, propertyRequest);
 		}
 	}
 }

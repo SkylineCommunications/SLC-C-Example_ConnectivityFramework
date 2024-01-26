@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Connections;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
@@ -30,16 +32,16 @@ public class QAction
 				i => Convert.ToString(interfaceKeys[i]),
 				u => Convert.ToInt32(interfacesTypes[u])) : new Dictionary<string, int>();
 
-			DCFMappingOptions opt = new DCFMappingOptions
+			DcfMappingOptions opt = new DcfMappingOptions
 			{
 				HelperType = SyncOption.EndOfPolling,
 				PIDcurrentConnections = Parameter.mapconnections_63998,
 				PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997,
 			};
 
-			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
+			using (DcfHelper dcf = new DcfHelper(protocol, Parameter.mapstartupelements_63993, opt))
 			{
-				List<DCFSaveConnectionRequest> allConnectionRequests = new List<DCFSaveConnectionRequest>();
+				List<DcfSaveConnectionRequest> allConnectionRequests = new List<DcfSaveConnectionRequest>();
 
 				for (int i = 0; i < sourceInterfacesO.Length; i++)
 				{
@@ -51,7 +53,7 @@ public class QAction
 					{
 						// SourceType tells us the ParameterGroupID for this Example Driver.
 						// Get the Source Interface from DCF.
-						ConnectivityInterface source = dcf.GetInterfaces(new DCFDynamicLink(src_parameterGroupID, sourceKey))[0].FirstInterface;
+						ConnectivityInterface source = dcf.GetInterface(new DcfInterfaceFilterSingle(src_parameterGroupID, sourceKey));
 						if (source == null)
 						{
 							protocol.Log("QA" + protocol.QActionID + "|SaveUniqueSource could not find Source:" + src_parameterGroupID + "/" + sourceKey, LogType.Error, LogLevel.NoLogging);
@@ -60,14 +62,14 @@ public class QAction
 
 						if (mapInterfaceType.TryGetValue(destinationKey, out int dst_parameterGroupID))
 						{
-							ConnectivityInterface destination = dcf.GetInterfaces(new DCFDynamicLink(dst_parameterGroupID, destinationKey))[0].FirstInterface;
+							ConnectivityInterface destination = dcf.GetInterface(new DcfInterfaceFilterSingle(dst_parameterGroupID, destinationKey));
 							if (destination == null)
 							{
 								protocol.Log("QA" + protocol.QActionID + "|SaveUniqueSource could not find destination:" + dst_parameterGroupID + "/" + destinationKey, LogType.Error, LogLevel.NoLogging);
 								continue; // Could not find the interface.
 							}
 
-							allConnectionRequests.Add(new DCFSaveConnectionRequest(source, destination, SaveConnectionType.Unique_Source));
+							allConnectionRequests.Add(new DcfSaveConnectionRequest(source, destination, SaveConnectionType.Unique_Source));
 
 							/*
 							 * SPECIFY UNIQUE SOURCE HERE => This allows the DCFHelper to find the old connection using the SOURCE interface as a Unique Key!
@@ -83,26 +85,24 @@ public class QAction
 					}
 				}
 
-				DCFSaveConnectionResult[] results = dcf.SaveConnections(allConnectionRequests.ToArray());
+				DcfSaveConnectionResult[] results = dcf.SaveConnections(allConnectionRequests.ToArray());
 
 				// Making some dummy properties.
 				Random r = new Random();
 
 				for (int i = 0; i < results.Length; i++)
 				{
-					DCFSaveConnectionResult result = results[i];
+					DcfSaveConnectionResult result = results[i];
 					if (result != null)
 					{
-						ConnectivityConnection sourceConnection = result.sourceConnection;
+						ConnectivityConnection sourceConnection = result.SourceConnection;
+
+						var property = new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dummy Value " + r.Next(4) };
+						var request = new DcfSaveConnectionPropertyRequest(property, false);
+
 						if (sourceConnection != null)
 						{
-							dcf.SaveConnectionProperties(
-								sourceConnection,
-								full: false,
-								fixedProperty: false,
-								addToReturnConnection: false,
-								async: true,
-								new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Dummy Value " + r.Next(4) });
+							dcf.SaveConnectionProperties(sourceConnection, request);
 						}
 					}
 				}

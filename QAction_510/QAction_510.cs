@@ -1,7 +1,10 @@
 using System;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Columns;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Connections;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
@@ -19,71 +22,66 @@ public class QAction
 			object[] connectedToColumn = (object[])columns[1];
 			object[] elementColumn = (object[])columns[2];
 
-			DCFMappingOptions opt = new DCFMappingOptions
+			DcfMappingOptions opt = new DcfMappingOptions
 			{
 				PIDcurrentConnections = Parameter.mapconnections_63998,
 				PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997,
 				HelperType = SyncOption.EndOfPolling,
 			};
 
-			// This uses DVEs so they need to be checked for startup, define what the Column is holding the ;element data (Multiple columns can be given and checked).
-			DVEColumn dveCol = new DVEColumn(Parameter.Dvetable.tablePid, Parameter.Dvetable.Idx.dvetablevirtualelementcolumn_504);
-
-			using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt, dveCol))
+			using (DcfHelper dcf = new DcfHelper(protocol, Parameter.mapstartupelements_63993, opt))
 			{
 				for (int i = 0; i < keys.Length; i++)
 				{
 					string key = Convert.ToString(keys[i]);
 					int connectionType = Convert.ToInt16(connectedToColumn[i]);
 					string dveElement = Convert.ToString(elementColumn[i]);
-					var sourceLink = new DCFDynamicLink(500, key, dveElement);
-					DCFSaveConnectionResult[] result;
+					var sourceLink = new DcfInterfaceFilterSingle(500, key, dveElement);
+					DcfSaveConnectionResult[] result;
 
 					switch (connectionType)
 					{
 						case 0:
 							// Connect to 2/1.
-							result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, sourceLink, new DCFDynamicLink(501, key, dveElement), SaveConnectionType.Unique_Source));
-							if (result[0].sourceConnection != null)
+							result = dcf.SaveConnections(new DcfSaveConnectionRequest(dcf, sourceLink, new DcfInterfaceFilterSingle(501, key, dveElement), SaveConnectionType.Unique_Source));
+							if (result[0].SourceConnection != null)
 							{
 								dcf.SaveConnectionProperties(
-									result[0].sourceConnection,
-									full: false,
-									new ConnectivityConnectionProperty
-									{
-										ConnectionPropertyName = "Input Port Name",
-										ConnectionPropertyType = "input",
-										ConnectionPropertyValue = "Port 1/1",
-									},
-									new ConnectivityConnectionProperty
-									{
-										ConnectionPropertyName = "Output Port Name",
-										ConnectionPropertyType = "output",
-										ConnectionPropertyValue = "Port 2/1",
-									});
+									result[0].SourceConnection,
+									new DcfSaveConnectionPropertyRequest(new ConnectivityConnectionProperty
+									 {
+										 ConnectionPropertyName = "Input Port Name",
+										 ConnectionPropertyType = "input",
+										 ConnectionPropertyValue = "Port 1/1",
+									 }),
+									new DcfSaveConnectionPropertyRequest(new ConnectivityConnectionProperty
+									 {
+										 ConnectionPropertyName = "Output Port Name",
+										 ConnectionPropertyType = "output",
+										 ConnectionPropertyValue = "Port 2/1",
+									 }));
 							}
 
 							break;
 						case 1:
 							// Connect to 2/2.
-							result = dcf.SaveConnections(new DCFSaveConnectionRequest(dcf, sourceLink, new DCFDynamicLink(502, key, dveElement), SaveConnectionType.Unique_Source));
-							if (result[0].sourceConnection != null)
+							result = dcf.SaveConnections(new DcfSaveConnectionRequest(dcf, sourceLink, new DcfInterfaceFilterSingle(502, key, dveElement), SaveConnectionType.Unique_Source));
+							if (result[0].SourceConnection != null)
 							{
 								dcf.SaveConnectionProperties(
-									result[0].sourceConnection,
-									full: false,
-									new ConnectivityConnectionProperty
-									{
-										ConnectionPropertyName = "Input Port Name",
-										ConnectionPropertyType = "input",
-										ConnectionPropertyValue = "Port 1/1",
-									},
-									new ConnectivityConnectionProperty
-									{
-										ConnectionPropertyName = "Output Port Name",
-										ConnectionPropertyType = "output",
-										ConnectionPropertyValue = "Port 2/2",
-									});
+									result[0].SourceConnection,
+									new DcfSaveConnectionPropertyRequest(new ConnectivityConnectionProperty
+									 {
+										 ConnectionPropertyName = "Input Port Name",
+										 ConnectionPropertyType = "input",
+										 ConnectionPropertyValue = "Port 1/1",
+									 }),
+									new DcfSaveConnectionPropertyRequest(new ConnectivityConnectionProperty
+									 {
+										 ConnectionPropertyName = "Output Port Name",
+										 ConnectionPropertyType = "output",
+										 ConnectionPropertyValue = "Port 2/2",
+									 }));
 							}
 
 							break;

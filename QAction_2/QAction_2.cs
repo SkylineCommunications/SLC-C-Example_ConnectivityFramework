@@ -1,7 +1,9 @@
 using System.Text;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Connections;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 public class QAction
@@ -15,7 +17,6 @@ public class QAction
 		StringBuilder sb = new StringBuilder();
 		sb.AppendLine("The DCF Simple Example Driver");
 		sb.AppendLine("--------------------------------------");
-		sb.AppendLine("The QuickAction 1: DCFHelper contains the namespace ProtocolDCF that can be copy pasted into other drivers.");
 		sb.AppendLine();
 		sb.AppendLine(@"This driver contains 4 Pages.
 The DCF Example - ... pages contain examples for specific DCF Situations.
@@ -38,30 +39,30 @@ DCF Example - Matrix
 		sb.AppendLine();
 		protocol.SetParameter(Parameter.help_1, sb.ToString());
 
-		DCFMappingOptions opt = new DCFMappingOptions();
+		DcfMappingOptions opt = new DcfMappingOptions();
 		opt.PIDcurrentConnections = Parameter.mapconnections_63998;
 		opt.PIDcurrentConnectionProperties = Parameter.mapconnectionproperties_63997;
 		opt.HelperType = SyncOption.Custom;
 
 		// Setting a DCFHelper StartupCheckPID will perform startup checks for all defined elements if they haven't already been performed
-		using (DCFHelper dcf = new DCFHelper(protocol, Parameter.mapstartupelements_63993, opt))
+		using (DcfHelper dcf = new DcfHelper(protocol, Parameter.mapstartupelements_63993, opt))
 		{
 			// Creating static connections from virtual A to out A1 and A2 and Virtual B to out B1 and B2. These will never be automatically cleared.
 			// Static connections from virtual A(9) to A1(4) and A2 (5).
-			DCFSaveConnectionRequest[] allConnections_A = new DCFSaveConnectionRequest[]
+			DcfSaveConnectionRequest[] allConnections_A = new[]
 			{
-				new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(9), new DCFDynamicLink(4),SaveConnectionType.Unique_Name,"Fixed A1",true),
-				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(9),new DCFDynamicLink(5),SaveConnectionType.Unique_Name,"Fixed A2",true),
+				new DcfSaveConnectionRequest(dcf, new DcfInterfaceFilterSingle(9), new DcfInterfaceFilterSingle(4),SaveConnectionType.Unique_Name,"Fixed A1",true),
+				new DcfSaveConnectionRequest(dcf, new DcfInterfaceFilterSingle(9),new DcfInterfaceFilterSingle(5),SaveConnectionType.Unique_Name,"Fixed A2",true),
 			};
 
 			// By setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling.
 			var resultA = dcf.SaveConnections(allConnections_A);
 
 			// Static connections from virtual B(10) to B1(6) and B2 (7)
-			DCFSaveConnectionRequest[] allConnections_B = new DCFSaveConnectionRequest[]
+			DcfSaveConnectionRequest[] allConnections_B = new[]
 			{
-				new DCFSaveConnectionRequest(dcf, new DCFDynamicLink(10), new DCFDynamicLink(6),SaveConnectionType.Unique_Name,"Fixed B1",true),
-				new DCFSaveConnectionRequest(dcf,new DCFDynamicLink(10),new DCFDynamicLink(7),SaveConnectionType.Unique_Name,"Fixed B2",true),
+				new DcfSaveConnectionRequest(dcf, new DcfInterfaceFilterSingle(10), new DcfInterfaceFilterSingle(6),SaveConnectionType.Unique_Name,"Fixed B1",true),
+				new DcfSaveConnectionRequest(dcf,new DcfInterfaceFilterSingle(10),new DcfInterfaceFilterSingle(7),SaveConnectionType.Unique_Name,"Fixed B2",true),
 			};
 
 			// By setting the fixedConnection boolean to true, these connections can only be cleaned up with a manual delete and not with EndOfPolling
@@ -70,25 +71,27 @@ DCF Example - Matrix
 			// Add some static Properties.
 			foreach (var res in resultA)
 			{
-				if (res.sourceConnection != null)
+				if (res.SourceConnection != null)
 				{
+					var property = new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" };
+					DcfSaveConnectionPropertyRequest request = new DcfSaveConnectionPropertyRequest(property, true);
 					dcf.SaveConnectionProperties(
-						res.sourceConnection,
-						full: false,
-						fixedProperty: true,
-						new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" });
+						res.SourceConnection,
+						request
+						);
 				}
 			}
 
 			foreach (var res in resultB)
 			{
-				if (res.sourceConnection != null)
+				if (res.SourceConnection != null)
 				{
+					var property = new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" };
+					var request = new DcfSaveConnectionPropertyRequest(property, true);
 					dcf.SaveConnectionProperties(
-						res.sourceConnection,
-						full: false,
-						fixedProperty: true,
-						new ConnectivityConnectionProperty { ConnectionPropertyName = "Passive Component", ConnectionPropertyType = "generic", ConnectionPropertyValue = "Fixed" });
+						res.SourceConnection,
+						request
+						);
 				}
 			}
 		}

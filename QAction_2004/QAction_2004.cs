@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-using ProtocolDCF;
-
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Interfaces;
+using Skyline.DataMiner.Core.ConnectivityFramework.Protocol.Options;
 using Skyline.DataMiner.Scripting;
 
 /// <summary>
@@ -18,20 +19,17 @@ public class QAction
 	/// <param name="protocol">Link with SLProtocol process.</param>
 	public static void Run(SLProtocol protocol)
 	{
-		DCFMappingOptions opt = new DCFMappingOptions
+		DcfRemovalOptionsManual opt = new DcfRemovalOptionsManual
 		{
 			HelperType = SyncOption.Custom,
 		};
 
-		using (DCFHelper dcf = new DCFHelper(protocol, false, opt))
+		using (DcfHelper dcf = new DcfHelper(protocol, false, opt))
 		{
-			DCFDynamicLinkResult[] result = dcf.GetInterfaces(new DCFDynamicLink(600, "*"));
-			foreach (var res in result)
+			var result = dcf.GetInterfaces(new DcfInterfaceFilterMulti(600, "*"));
+			foreach (var itf in result)
 			{
-				foreach (var itf in res.AllInterfaces)
-				{
-					protocol.Log("QA" + protocol.QActionID + "|itf|dynamicPK:" + itf.DynamicPK + "dynamicLink" + itf.DynamicLink, LogType.Error, LogLevel.NoLogging);
-				}
+				protocol.Log("QA" + protocol.QActionID + "|itf|dynamicPK:" + itf.DynamicPK + "dynamicLink" + itf.DynamicLink, LogType.Error, LogLevel.NoLogging);
 			}
 		}
 	}
