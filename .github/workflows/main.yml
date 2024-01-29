@@ -31,7 +31,7 @@ jobs:
     
    # Optional 0 or More CD Jobs as needed
   CD:
-    if: github.ref_type == 'tag'
+   # if: github.ref_type == 'tag'
     environment: production
     name: CD
     runs-on: windows-latest
@@ -40,6 +40,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - name: Install DataMiner Deploy
+        run: dotnet tool install -g Skyline.DataMiner.CICD.Tools.DataMinerDeploy
+      
      # Deploys the artifact directly to an internet-accessible DataMiner Agent. Deployment from the catalog currently not supported.
-
+      - name: Download Created Connector Package
+        id: downloadPackage
+        uses: actions/download-artifact@v4
+        with:
+          name: Connector Package
+          path: _PackageResults
+          
+      - name: Find .dmprotocol
+        id: findcreatedpackage        
+        run: |
+          IFS=$'\n'
+          echo packageName=$(find _PackageResults -type f -name '*.dmprotocol') >> $GITHUB_OUTPUT
+          unset IFS
+        shell: bash  
+        
+      - name: Direct Agent Deployment
+        run: dataminer-package-deploy from-artifact --path-to-artifact "${{ steps.findcreatedpackage.outputs.packageName }}" --dm-server-location "${{ secrets.serverLocation }}" --dm-user "${{ secrets.dataminerUser }}" --dm-password "${{ secrets.dataminerPassword }}"
       
