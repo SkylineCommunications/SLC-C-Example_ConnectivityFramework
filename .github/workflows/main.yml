@@ -33,7 +33,7 @@ jobs:
 #ON RELEASE OR PRE-RELEASE
       - name: Create DMAPP - Release
         if: inputs.referenceType == 'tag'
-        run: dataminer-package-create dmprotocol ${{ github.workspace }} --name  "${{ inputs.repository  }}_${{ inputs.referenceName }}" --output ${{ github.workspace }} --version-override "${{ inputs.referenceName  }}"
+        run: dataminer-package-create dmprotocol ${{ github.workspace }} --name  "${{ github.repository  }}_${{ github.ref_name }}" --output ${{ github.workspace }} --version-override "${{ github.ref_name }}"
 
 
 #ON BUILD
@@ -57,10 +57,9 @@ jobs:
       - name: Create DMAPP - Build
         if: inputs.referenceType != 'tag'
         run: |
-          dataminer-package-create dmprotocol ${{ github.workspace }} --name  "${{ inputs.repository  }}_${{ inputs.runNumber }}" --output ${{ github.workspace }} --version-override "${{ env.PROTOCOL_VERSION }}_B${{ inputs.runNumber }}"
+          dataminer-package-create dmprotocol ${{ github.workspace }} --name  "${{ github.repository  }}_${{ github.run_number }}" --output ${{ github.workspace }} --version-override "${{ env.PROTOCOL_VERSION }}_B${{ github.run_number }}"
         shell: bash
-
-
+     
      # Deploys the artifact directly to an internet-accessible DataMiner Agent. Deployment from the catalog currently not supported.    
       - name: Find .dmprotocol
         id: findcreatedpackage        
