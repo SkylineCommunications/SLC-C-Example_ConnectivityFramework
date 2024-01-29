@@ -38,8 +38,6 @@ jobs:
     needs: CI
   
     steps:
-      - uses: actions/checkout@v3
-      
       - name: Install DataMiner Deploy
         run: dotnet tool install -g Skyline.DataMiner.CICD.Tools.DataMinerDeploy
       
