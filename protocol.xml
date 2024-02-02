@@ -52,7 +52,7 @@ Any inquiries can be addressed to:
 	<Vendor>Skyline Example</Vendor>
 	<VendorOID>1.3.6.1.4.1.8813.2.1218</VendorOID>
 	<DeviceOID>1</DeviceOID>
-	<ElementType>Virtual</ElementType>
+	<ElementType>Example</ElementType>
 	<Type relativeTimers="true" options="exportProtocol:Skyline Example ConnectivityFramework - DVE:500">virtual</Type>
 	<Display defaultPage="General" pageOrder="General;DCF Example - Fixed Interfaces;Table Interfaces;DCF Example - Unique Source;DCF Example - DVE;DCF Example - Matrix" wideColumnPages="General" />
 	<SNMP includepages="true">auto</SNMP>
